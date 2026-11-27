@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>KASANE Lines</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@200;300;400&amp;family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&amp;family=Noto+Sans+JP:wght@200;300;400&amp;family=Noto+Serif+JP:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#000000}
+html{overscroll-behavior-y:auto !important}
+a{color:inherit}
+a:hover{color:inherit}
+.bar{position:relative;display:inline-block;text-decoration:none;padding-bottom:24px;cursor:pointer;background:none;border:0;font:inherit;color:inherit;letter-spacing:inherit}
+.bar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:var(--barh,18px);background:var(--bar,currentColor);transform-origin:50% 100%;transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.bar:hover::after,.bar:focus-visible::after{transform:scaleY(.056)}
+.ln{background:none;border:0;border-radius:0;cursor:pointer;font:inherit;letter-spacing:inherit;color:inherit;padding:10px 0;display:flex;align-items:center;gap:10px}
+.addbtn{transition:background-color .7s cubic-bezier(.45,0,.2,1),color .7s cubic-bezier(.45,0,.2,1)}
+.addbtn:hover{background:#000000 !important;color:#efe8d7 !important}
+.bar:focus-visible,.ln:focus-visible,.addbtn:focus-visible{outline:1px solid #000000;outline-offset:4px}
+.card{transition:transform 1.4s cubic-bezier(.22,1,.36,1)}
+.card:hover{transform:rotate(-14deg) translateY(-12px) !important}
+.ground{transition:background-color 1.6s cubic-bezier(.65,0,.35,1)}
+.cardin{animation:cardin .9s cubic-bezier(.19,1,.22,1) both}
+@keyframes cardin0{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:none}}
+@keyframes cardin1{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:none}}
+@keyframes cardin2{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:none}}
+@keyframes cardin3{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:none}}
+@keyframes cardin4{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:none}}
+.ticker{display:inline-block;white-space:nowrap;animation:tick 60s linear infinite}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){.ticker{animation:none !important}.cardwrap{animation:none !important}}
+</style>
+</helmet>
+
+<div class="ground" style="background: {{ground}}; color: #000000; font-family: 'Albert Sans', 'Noto Sans JP', sans-serif; font-weight: 300; letter-spacing: .08em; font-feature-settings: 'palt'; word-break: auto-phrase; text-wrap: pretty;">
+
+  <!-- ========== INNER STAGE ========== -->
+  <section aria-label="{{name}} ライン" style="position: relative; min-height: 900px; overflow: hidden;">
+
+    <!-- outline headline behind -->
+    <p aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 196px; transform: scaleY(1.1); transform-origin: center top; margin: 0; text-align: center; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: clamp(80px, 12vw, 176px); line-height: 1; letter-spacing: -.015em; color: transparent; -webkit-text-stroke: 1px {{color}}; white-space: nowrap; z-index: 0;">{{name}}</p>
+
+    <!-- header (difference) -->
+    <header style="position: absolute; left: 60px; right: 60px; top: 48px; z-index: 4; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px; color: {{accent}}; mix-blend-mode: difference;">
+      <a href="Main.dc.html" style="text-decoration: none; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 30px; letter-spacing: .14em;">KASANE</a>
+      <nav aria-label="メイン" style="display: flex; flex-wrap: wrap; gap: 8px 32px; font-size: 18px; line-height: 22px;">
+        <a class="bar" href="Shop.dc.html" style="--bar: {{accent}};">Shop</a>
+        <a class="bar" href="About.dc.html" style="--bar: {{accent}};">About</a>
+        <a class="bar" href="Journal.dc.html" style="--bar: {{accent}};">Journal</a>
+      </nav>
+      <a href="Cart.dc.html" aria-label="カート（{{cartCount}}点）" style="flex: none; width: 76px; height: 76px; border-radius: 50%; border: 1px solid {{accent}}; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; text-decoration: none; color: {{accent}}; font-size: 13px; letter-spacing: .1em; font-weight: 400;"><span>Cart</span><span>{{cartCount}}</span></a>
+    </header>
+
+    <!-- line switcher -->
+    <div role="group" aria-label="ラインを切り替える" style="position: absolute; left: 0; right: 0; top: 140px; z-index: 3; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 28px; font-size: 15px; font-weight: 400;">
+      <sc-for list="{{switcher}}" as="s" hint-placeholder-count="5">
+        <button class="ln" type="button" aria-pressed="{{s.pressed}}" onClick="{{s.pick}}">
+          <span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: {{s.dot}}; border: 1px solid {{s.color}};"></span>{{s.name}}
+        </button>
+      </sc-for>
+    </div>
+
+    <!-- cards -->
+    <div style="position: relative; z-index: 2; max-width: 1320px; margin: 0 auto; padding: 430px 60px 230px; box-sizing: border-box; display: flex; flex-wrap: wrap; justify-content: center; gap: 40px 0;">
+      <sc-for list="{{cards}}" as="c" hint-placeholder-count="2">
+        <div class="cardwrap" style="width: min(560px, 100%); animation: cardin{{idx}} 1.6s cubic-bezier(.22,1,.36,1) {{c.delay}}s both; margin-top: {{c.offset}}; margin-left: {{c.ml}};">
+          <a class="card" href="{{c.href}}" style="display: flex; gap: 24px; align-items: flex-end; width: min(560px, 100%); aspect-ratio: 560 / 396; box-sizing: border-box; padding: 24px; background: {{color}}; color: {{on}}; text-decoration: none; transform: rotate(-14deg);">
+            <img src="{{c.img}}" alt="{{c.alt}}" style="width: 53%; height: 100%; object-fit: cover; display: block;">
+            <span style="display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-size: 13px; letter-spacing: .1em; font-weight: 400;">{{num}} / {{name}}</span>
+              <span style="font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 30px; line-height: 1.05;">{{c.name}}</span>
+              <span style="font-size: 14px;">{{c.jp}}</span>
+            </span>
+          </a>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- back + lead -->
+    <a class="bar" href="Main.dc.html" style="position: absolute; left: 60px; bottom: 90px; z-index: 4; --bar: {{accent}}; color: {{accent}}; mix-blend-mode: difference; font-size: 13px; letter-spacing: .1em; font-weight: 400; padding-bottom: 14px; --barh: 6px;">Back to Lines</a>
+    <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 36px; z-index: 4; color: {{accent}}; mix-blend-mode: difference; text-align: center; padding: 0 24px;">
+      <span style="display: block; font-family: 'Noto Serif JP', serif; font-weight: 400; font-size: 20px; letter-spacing: .16em;">{{catch}}</span>
+    </div>
+  </section>
+
+  <!-- ========== STORY + PRODUCTS ========== -->
+  <section style="padding: 120px 60px 160px;">
+    <div style="max-width: 1320px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 64px 80px;">
+      <div style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 28px;">
+        <span style="font-size: 13px; letter-spacing: .1em; font-weight: 400;">{{num}} / {{name}} — {{jp}}</span>
+        <h1 style="margin: 0; font-family: 'Noto Serif JP', serif; font-weight: 400; font-size: 34px; line-height: 1.6; letter-spacing: .06em;">{{catch}}</h1>
+        <p style="margin: 0; font-size: 18px; line-height: 1.9;">{{story}}</p>
+        <figure style="margin: 0; position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: {{color}};">
+          <img src="{{scene}}" alt="{{sceneAlt}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+        </figure>
+      </div>
+      <div style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column;">
+        <h2 style="margin: 0 0 24px; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 40px; line-height: 1.1;">Items</h2>
+        <sc-for list="{{cards}}" as="c" hint-placeholder-count="2">
+          <div style="display: flex; flex-wrap: wrap; gap: 20px 28px; padding: 28px 0; border-top: 1px solid #000000; align-items: center;">
+            <img src="{{c.img}}" alt="{{c.alt}}" style="width: 120px; height: 150px; object-fit: cover; display: block; flex: none;">
+            <div style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 8px;">
+              <h3 style="margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 26px;">{{c.name}}</h3>
+              <p style="margin: 0; font-size: 15px; line-height: 1.7;">{{c.jp}}　{{c.vol}}　[価格（税込）]</p>
+              <p style="margin: 0; font-size: 14px; line-height: 1.8;">{{c.desc}}</p>
+            </div>
+            <button type="button" class="addbtn" onClick="{{c.add}}" style="flex: none; height: 48px; padding: 0 24px; background: {{color}}; color: {{on}}; border: 0; border-radius: 0; font: inherit; font-size: 14px; letter-spacing: .12em; font-weight: 400; cursor: pointer;">{{c.label}}</button>
+          </div>
+        </sc-for>
+        <div style="border-top: 1px solid #000000; padding-top: 32px; display: flex; flex-wrap: wrap; gap: 24px 40px;">
+          <a class="bar" href="Shop.dc.html" style="--bar: #000000; font-size: 18px;">ほかのラインも見る</a>
+          <a class="bar" href="{{journalHref}}" style="--bar: #000000; font-size: 18px;">このラインの読みもの</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"line":{"editor":"enum","options":["Cleanse","Hydrate","Balance","Glow","Ritual"],"default":"Hydrate"},"$preview":{"width":1440,"height":2080}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const names = ['Cleanse', 'Hydrate', 'Balance', 'Glow', 'Ritual'];
+    const i = names.indexOf(props.line || 'Hydrate');
+    this.state = { idx: i < 0 ? 1 : i, cart: {} };
+  }
+  // shared cart: same key on every page (falls back to page state if storage is blocked)
+  loadCart() { try { const v = window.localStorage.getItem('kasane-cart-v1'); return v ? JSON.parse(v) : {}; } catch (e) { return null; } }
+  saveCart(c) { this.setState({ cart: c }); try { window.localStorage.setItem('kasane-cart-v1', JSON.stringify(c)); } catch (e) {} }
+  componentDidMount() {
+    this._sync = () => {
+      const v = this.loadCart(); if (v) this.setState({ cart: v });
+      try { const i = ['Cleanse', 'Hydrate', 'Balance', 'Glow', 'Ritual'].indexOf(window.localStorage.getItem('kasane-line-v1')); if (i >= 0 && i !== this.state.idx) this.setState({ idx: i }); } catch (e) {}
+    };
+    this._sync();
+    try { window.addEventListener('storage', this._sync); window.addEventListener('focus', this._sync); document.addEventListener('visibilitychange', this._sync); } catch (e) {}
+  }
+  componentWillUnmount() { try { window.removeEventListener('storage', this._sync); window.removeEventListener('focus', this._sync); document.removeEventListener('visibilitychange', this._sync); } catch (e) {} }
+  renderVals() {
+    const L = [
+      { name: 'Cleanse', jp: '落とす', num: '01', color: '#e83c38', on: '#000000', ground: '#9acbc2', accent: '#00fff3',
+        catch: 'お手入れは、落とすことから。', story: '1日の終わりに肌に残ったものを、こすらずにふわりと浮かせて洗い流す。Cleanse は、次に重ねる色のための、まっさらな肌をつくるシリーズ。', scene: 'media/pexels-4121831.jpg', sceneAlt: '水面で跳ねる水滴',
+        items: [
+          { id: 'oil', name: 'Cleansing Oil', jp: 'クレンジングオイル', vol: '150mL', img: 'media/pexels-7814990.jpg', alt: 'クレンジングオイルのポンプボトル', desc: 'メイクも今日の名残も、するりとほどく。' },
+          { id: 'foam', name: 'Foam Wash', jp: '泡洗顔料', vol: '150mL', img: 'media/pexels-6167867.jpg', alt: '黒い泡ポンプボトル', desc: '泡にまかせて、ふれずに洗う。' } ] },
+      { name: 'Hydrate', jp: '満たす', num: '02', color: '#1d8883', on: '#000000', ground: '#d2d2d2', accent: '#b54a4f',
+        catch: 'うるおいを、1層ずつ重ねる。', story: '化粧水でととのえて、美容液でもう1層。Hydrate は、乾きがちな肌にうるおいを重ねていく、ふたつのアイテムでできている。', scene: 'media/pexels-9038626.jpg', sceneAlt: '頬に美容液をのせる女性',
+        items: [
+          { id: 'lotion', name: 'Lotion', jp: '化粧水', vol: '200mL', img: 'media/pexels-8128069.jpg', alt: '透明な化粧水のボトル', desc: '最初の1層を、さらりと澄んだ化粧水で。' },
+          { id: 'serum', name: 'Serum', jp: '美容液', vol: '30mL', img: 'media/pexels-6800941.jpg', alt: '美容液のボトル', desc: '水のように軽い、もう1枚のうるおい。' } ] },
+      { name: 'Balance', jp: '整える', num: '03', color: '#002a5a', on: '#efe8d7', ground: '#efe8d7', accent: '#efbe7d',
+        catch: '重ねたうるおいに、そっとふたを。', story: '季節や環境で、肌の調子は毎日少しずつ変わるもの。Balance は、そんなゆらぎをやさしく受けとめる、お手入れの仕上げのシリーズ。', scene: 'media/pexels-6496465.jpg', sceneAlt: 'クリームのテクスチャー',
+        items: [
+          { id: 'cream', name: 'Cream', jp: 'クリーム', vol: '50g', img: 'media/pexels-18350885.jpg', alt: 'クリームの容器', desc: 'とろけてほどける、手入れの最後のふた。' },
+          { id: 'gel', name: 'Barrier Gel', jp: 'ジェルクリーム', vol: '80g', img: 'media/pexels-8533216.jpg', alt: 'グレーのチューブ', desc: 'のばした瞬間、水に変わるジェル。' } ] },
+      { name: 'Glow', jp: '灯す', num: '04', color: '#6d3969', on: '#efe8d7', ground: '#e0f8fd', accent: '#73bf94',
+        catch: '素肌に、ひとつ明かりを灯して。', story: '隠すのではなく、ツヤをそっと足す。Glow は、素肌の色はそのままに、光の当たり方だけを変えてくれるシリーズ。', scene: 'media/pexels-30229022.jpg', sceneAlt: '光の中のスポイトボトル',
+        items: [
+          { id: 'base', name: 'Glow Base', jp: '化粧下地', vol: '30g', img: 'media/pexels-10566524.jpg', alt: '光の縞が落ちる白いポンプボトル', desc: '色はのせず、光だけを足す下地。' },
+          { id: 'faceoil', name: 'Face Oil', jp: 'フェイスオイル', vol: '30mL', img: 'media/pexels-8054395.jpg', alt: '琥珀色のスポイトボトル', desc: '1滴まぜて、ツヤの量を自分で決める。' } ] },
+      { name: 'Ritual', jp: '香る', num: '05', color: '#282b29', on: '#f0c1c1', ground: '#f4c4c4', accent: '#cc999b',
+        catch: 'お手入れの時間を、香りでむすぶ。', story: '顔のお手入れが終わったら、次は体へ。Ritual は、1日の終わりをやさしく区切る、ボディと香りのシリーズ。', scene: 'media/pexels-8361478.jpg', sceneAlt: '砂浜の香水瓶',
+        items: [
+          { id: 'body', name: 'Body Milk', jp: 'ボディミルク', vol: '250mL', img: 'media/pexels-8217476.jpg', alt: '琥珀色のポンプボトルを押す手', desc: '白茶と杉の香りで、1日を閉じる。' },
+          { id: 'parfum', name: 'Eau de Parfum', jp: 'オードパルファム', vol: '50mL', img: 'media/pexels-34089130.jpg', alt: 'すりガラスの香水瓶', desc: '自分だけが気づく、静かな余韻。' } ] }
+    ];
+    const idx = this.state.idx;
+    const cur = L[idx];
+    const cart = this.state.cart;
+    const lead = cur.jp + '。' + cur.story + '　　　';
+    return {
+      idx, name: cur.name, jp: cur.jp, num: cur.num, color: cur.color, on: cur.on, ground: cur.ground, accent: cur.accent,
+      catch: cur.catch, story: cur.story, scene: cur.scene, sceneAlt: cur.sceneAlt,
+      ticker: lead.repeat(6),
+      journalHref: ({ Cleanse: 'J-cleanse.dc.html', Hydrate: 'J-hydrate.dc.html', Balance: 'J-cream.dc.html', Glow: 'J-glow.dc.html', Ritual: 'J-night.dc.html' })[cur.name] || 'Journal.dc.html',
+      cartCount: Object.values(cart).reduce((a, b) => a + b, 0),
+      switcher: L.map((l, i) => ({ name: l.name, color: l.color, dot: i === idx ? l.color : 'transparent', pressed: i === idx ? 'true' : 'false', pick: () => { this.setState({ idx: i }); try { window.localStorage.setItem('kasane-line-v1', l.name); } catch (e) {} } })),
+      cards: cur.items.map((it, i) => ({
+        ...it, href: 'P-' + it.id + '.dc.html', delay: (i * 0.12).toFixed(2), offset: i === 1 ? '160px' : '0px', ml: i === 1 ? '-60px' : '0px',
+        label: cart[it.id] ? 'カートに入れる（' + cart[it.id] + '）' : 'カートに入れる',
+        add: () => this.saveCart({ ...cart, [it.id]: (cart[it.id] || 0) + 1 })
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

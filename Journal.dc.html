@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<!-- 更新履歴: 2026-11-26 記事1本のページから、記事一覧ページに変更（各記事は J-*.dc.html） -->
+<title>KASANE Journal</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@200;300;400&amp;family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&amp;family=Noto+Sans+JP:wght@200;300;400&amp;family=Noto+Serif+JP:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#000000}
+html{overscroll-behavior-y:auto !important}
+a{color:inherit}
+a:hover{color:inherit}
+.bar{position:relative;display:inline-block;text-decoration:none;padding-bottom:24px;cursor:pointer;background:none;border:0;font:inherit;color:inherit;letter-spacing:inherit}
+.bar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:var(--barh,18px);background:var(--bar,currentColor);transform-origin:50% 100%;transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.bar:hover::after,.bar:focus-visible::after{transform:scaleY(.056)}
+.tab{position:relative;background:none;border:0;border-radius:0;padding:10px 0 22px;font:inherit;letter-spacing:inherit;color:#efe8d7;cursor:pointer}
+.tab::after{content:"";position:absolute;left:0;right:0;bottom:0;height:var(--h,1px);background:var(--bar,#efe8d7);transition:height .8s cubic-bezier(.22,1,.36,1)}
+.story-img{transition:transform 1.6s cubic-bezier(.22,1,.36,1)}
+.story:hover .story-img{transform:scale(1.04)}
+.bar:focus-visible,.tab:focus-visible,.story:focus-visible{outline:1px solid #efe8d7;outline-offset:4px}
+@media (prefers-reduced-motion: reduce){.story-img{transition:none}}
+</style>
+</helmet>
+
+<div style="background: #000000; color: #efe8d7; font-family: 'Albert Sans', 'Noto Sans JP', sans-serif; font-weight: 200; letter-spacing: .08em; font-feature-settings: 'palt'; word-break: auto-phrase; text-wrap: pretty;">
+
+  <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px 40px; padding: 40px 60px;">
+    <a href="Main.dc.html" style="text-decoration: none; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 30px; letter-spacing: .14em;">KASANE</a>
+    <nav aria-label="メイン" style="display: flex; flex-wrap: wrap; gap: 8px 36px; font-size: 18px; line-height: 22px;">
+      <a class="bar" href="Shop.dc.html" style="--bar: #1d8883;">Shop</a>
+      <a class="bar" href="Line.dc.html" style="--bar: #1d8883;">Lines</a>
+      <a class="bar" href="About.dc.html" style="--bar: #1d8883;">About</a>
+      <a class="bar" href="Journal.dc.html" aria-current="page" style="--bar: #efe8d7;">Journal</a>
+    </nav>
+    <a href="Cart.dc.html" aria-label="カート（{{cartCount}}点）" style="flex: none; width: 76px; height: 76px; border-radius: 50%; border: 1px solid #efe8d7; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; text-decoration: none; font-size: 13px; letter-spacing: .1em; font-weight: 400;"><span>Cart</span><span>{{cartCount}}</span></a>
+  </header>
+
+  <section style="padding: 60px 60px 40px;">
+    <div style="max-width: 1320px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 32px;">
+      <h1 style="margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: clamp(72px, 10.8vw, 156px); line-height: 1; letter-spacing: -.015em; transform: scaleY(1.1); transform-origin: left bottom;">Journal</h1>
+      <p style="margin: 0 0 12px; max-width: 460px; font-size: 18px; line-height: 1.8;">5つのお手入れを、もっと楽しむための読みもの。</p>
+    </div>
+  </section>
+
+  <section style="padding: 0 60px;">
+    <div style="max-width: 1320px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px 40px; padding-top: 16px;">
+      <div role="group" aria-label="ラインで絞り込む" style="display: flex; flex-wrap: wrap; gap: 4px 36px; font-size: 18px;">
+        <sc-for list="{{tabs}}" as="t" hint-placeholder-count="5">
+          <button class="tab" type="button" aria-pressed="{{t.pressed}}" onClick="{{t.pick}}" style="--bar: {{t.color}}; --h: {{t.h}};">{{t.label}}</button>
+        </sc-for>
+      </div>
+      <p style="margin: 0 0 22px; font-size: 13px; letter-spacing: .1em; font-weight: 400;">{{countLabel}}</p>
+    </div>
+  </section>
+
+  <!-- featured -->
+  <sc-if value="{{featured}}" hint-placeholder-val="{{ true }}">
+    <section style="padding: 56px 60px 0;">
+      <a class="story" href="{{featured.href}}" style="max-width: 1320px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 32px 56px; align-items: center; text-decoration: none;">
+        <div style="flex: 3 1 560px; min-width: 0; position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: {{featured.color}};">
+          <img class="story-img" src="{{featured.hero}}" alt="{{featured.heroAlt}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+          <span aria-hidden="true" style="position: absolute; left: 0; bottom: 0; width: 72px; height: 14px; background: {{featured.color}};"></span>
+        </div>
+        <div style="flex: 2 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 20px;">
+          <span style="align-self: flex-start; padding: 6px 12px; background: {{featured.color}}; color: {{featured.on}}; font-size: 13px; letter-spacing: .1em; font-weight: 400;">{{featured.line}}</span>
+          <span style="font-size: 13px; letter-spacing: .1em; font-weight: 400;">Journal {{featured.no}} — [公開日] — 読了 約{{featured.min}}分</span>
+          <h2 style="margin: 0; font-family: 'Noto Serif JP', serif; font-weight: 400; font-size: clamp(26px, 2.6vw, 36px); line-height: 1.6; letter-spacing: .06em; white-space: pre-line;">{{featured.title}}</h2>
+          <p style="margin: 0; font-size: 16px; line-height: 1.9;">{{featured.lead}}</p>
+          <span style="font-size: 18px; display: inline-flex; flex-direction: column; gap: 4px; align-self: flex-start;"><span>読む</span><span aria-hidden="true" style="height: 18px; background: {{featured.color}};"></span></span>
+        </div>
+      </a>
+    </section>
+  </sc-if>
+
+  <!-- rest -->
+  <section style="padding: 96px 60px 160px;">
+    <div style="max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 56px 40px;">
+      <sc-for list="{{rest}}" as="j" hint-placeholder-count="3">
+        <a class="story" href="{{j.href}}" style="display: flex; flex-direction: column; gap: 18px; text-decoration: none;">
+          <div style="position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: {{j.color}};">
+            <img class="story-img" src="{{j.hero}}" alt="{{j.heroAlt}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.88);">
+            <span aria-hidden="true" style="position: absolute; left: 0; bottom: 0; width: 56px; height: 12px; background: {{j.color}};"></span>
+          </div>
+          <span style="font-size: 13px; letter-spacing: .1em; font-weight: 400;">{{j.line}} — Journal {{j.no}} — [公開日]</span>
+          <h3 style="margin: 0; font-size: 20px; line-height: 1.6; font-weight: 300; letter-spacing: .06em; white-space: pre-line;">{{j.title}}</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.8;">{{j.lead}}</p>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <footer style="padding: 60px; border-top: 1px solid #efe8d7;">
+    <div style="max-width: 1320px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 24px 40px; justify-content: space-between; align-items: center; font-size: 13px; letter-spacing: .1em; font-weight: 400;">
+      <span style="font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 24px; letter-spacing: .14em;">KASANE</span>
+      <small style="font-size: 13px;">© KASANE [会社名]</small>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1880}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { cart: {}, filter: 'All' }; }
+  // shared cart: same key on every page (falls back to page state if storage is blocked)
+  loadCart() { try { const v = window.localStorage.getItem('kasane-cart-v1'); return v ? JSON.parse(v) : {}; } catch (e) { return null; } }
+  componentDidMount() {
+    this._sync = () => { const v = this.loadCart(); if (v) this.setState({ cart: v }); };
+    this._sync();
+    try { window.addEventListener('storage', this._sync); window.addEventListener('focus', this._sync); document.addEventListener('visibilitychange', this._sync); } catch (e) {}
+  }
+  componentWillUnmount() { try { window.removeEventListener('storage', this._sync); window.removeEventListener('focus', this._sync); document.removeEventListener('visibilitychange', this._sync); } catch (e) {} }
+  renderVals() {
+    const C = {
+      Cleanse: { color: '#e83c38', on: '#000000' }, Hydrate: { color: '#1d8883', on: '#000000' },
+      Balance: { color: '#002a5a', on: '#efe8d7' }, Glow: { color: '#6d3969', on: '#efe8d7' }, Ritual: { color: '#f0c1c1', on: '#282b29' }
+    };
+    const list = [
+      { id: 'glow', no: '013', line: 'Glow', min: 3, title: 'ツヤは、量より\n置く場所で決まる', hero: 'media/pexels-8054395.jpg', heroAlt: '光と影の中の琥珀色のスポイトボトル', lead: '顔全体に塗るより、光が当たる場所を選んで。下地とフェイスオイルの使い分け。' },
+      { id: 'hydrate', no: '012', line: 'Hydrate', min: 4, title: '乾燥が気になる季節の、\n化粧水と美容液の重ね方', hero: 'media/pexels-9038626.jpg', heroAlt: '頬に美容液をのせる女性', lead: 'アイテムを増やす前に、重ねる順番と「間」を見直してみる。乾く季節の、化粧水と美容液の使い方。' },
+      { id: 'night', no: '011', line: 'Ritual', min: 4, title: '5分で終える、\n夜の手入れの組み立て方', hero: 'media/pexels-6417910.jpg', heroAlt: '鏡の前で手入れをする女性', lead: '疲れた夜でも続けられるように、順番と時間の配分を先に決めておく。' },
+      { id: 'cream', no: '010', line: 'Balance', min: 3, title: 'クリームの量は\n「パール1粒」から考える', hero: 'media/pexels-6496465.jpg', heroAlt: 'なめらかなクリームのテクスチャー', lead: 'たくさん塗るより、少しから始めて足していく。季節と翌朝の肌で、ちょうどいい量を見つけて。' },
+      { id: 'cleanse', no: '009', line: 'Cleanse', min: 3, title: 'こすらないクレンジングのための、\n3つの手の動き', hero: 'media/pexels-6167867.jpg', heroAlt: '大理石の前の泡ポンプボトル', lead: '急いでいる日ほど、肌をこすりがち。力を入れずに落とすための、3つの手の動き。' }
+    ].map((a) => ({ ...a, ...C[a.line], href: 'J-' + a.id + '.dc.html' }));
+    const f = this.state.filter;
+    const shown = list.filter((a) => f === 'All' || a.line === f);
+    const tabNames = ['All', 'Cleanse', 'Hydrate', 'Balance', 'Glow', 'Ritual'];
+    return {
+      cartCount: Object.values(this.state.cart).reduce((a, b) => a + b, 0),
+      countLabel: shown.length + ' stories',
+      tabs: tabNames.map((t) => ({ label: t, pressed: t === f ? 'true' : 'false', color: t === 'All' || t === 'Balance' || t === 'Glow' ? '#efe8d7' : C[t].color, h: t === f ? '10px' : '1px', pick: () => this.setState({ filter: t }) })),
+      featured: shown.length ? shown[0] : false,
+      rest: shown.slice(1)
+    };
+  }
+}
+</script>
+</body>
+</html>

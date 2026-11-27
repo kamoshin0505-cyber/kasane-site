@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>KASANE Journal 記事（共通部品）</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@200;300;400&amp;family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&amp;family=Noto+Sans+JP:wght@200;300;400&amp;family=Noto+Serif+JP:wght@400;500&amp;display=swap">
+<style>body{margin:0}html{overscroll-behavior-y:auto !important}</style>
+</helmet>
+
+<div style="background: #000000; color: #efe8d7; font-family: 'Albert Sans', 'Noto Sans JP', sans-serif; font-weight: 200; letter-spacing: .08em; font-feature-settings: 'palt'; word-break: auto-phrase; text-wrap: pretty;">
+
+  <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px 40px; padding: 40px 60px;">
+    <a href="Main.dc.html" style="text-decoration: none; color: #efe8d7; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 30px; letter-spacing: .14em;">KASANE</a>
+    <nav aria-label="メイン" style="display: flex; flex-wrap: wrap; gap: 8px 36px; font-size: 18px; line-height: 22px;">
+      <sc-for list="{{nav}}" as="n" hint-placeholder-count="4">
+        <a class="bx" href="{{n.href}}" style="display: inline-flex; flex-direction: column; gap: 4px; text-decoration: none; color: #efe8d7;"><span>{{n.label}}</span><span class="bl" aria-hidden="true" style="display: block; height: 18px; background: {{n.bar}}; transform-origin: 50% 100%; transition: transform .8s cubic-bezier(.22,1,.36,1);"></span></a>
+      </sc-for>
+    </nav>
+    <a href="Cart.dc.html" aria-label="カート（{{cartCount}}点）" style="flex: none; width: 76px; height: 76px; border-radius: 50%; border: 1px solid {{t.color}}; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; text-decoration: none; color: #efe8d7; font-size: 13px; letter-spacing: .1em; font-weight: 400;"><span>Cart</span><span>{{cartCount}}</span></a>
+  </header>
+
+  <article>
+    <!-- title -->
+    <div style="padding: 60px 60px 56px;">
+      <div style="max-width: 960px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px;">
+        <div style="display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; font-size: 13px; letter-spacing: .1em; font-weight: 400;">
+          <span style="padding: 6px 12px; background: {{t.color}}; color: {{t.on}};">{{a.line}}</span>
+          <span>Journal {{a.no}}</span>
+          <span>[公開日]</span>
+          <span>読了 約{{a.min}}分</span>
+        </div>
+        <h1 style="margin: 0; font-family: 'Noto Serif JP', serif; font-weight: 400; font-size: clamp(30px, 3.6vw, 48px); line-height: 1.6; letter-spacing: .06em; white-space: pre-line;">{{a.title}}</h1>
+      </div>
+    </div>
+    <figure style="margin: 0 0 96px; padding: 0 60px;">
+      <img src="{{a.hero}}" alt="{{a.heroAlt}}" style="display: block; width: 100%; max-width: 1320px; margin: 0 auto; aspect-ratio: 21 / 9; object-fit: cover; object-position: 50% 35%;">
+    </figure>
+
+    <!-- body -->
+    <div style="padding: 0 60px;">
+      <div style="max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px; font-size: 18px; line-height: 2.1; font-weight: 300;">
+        <sc-for list="{{blocks}}" as="b" hint-placeholder-count="8">
+          <sc-if value="{{b.isP}}" hint-placeholder-val="{{ true }}">
+            <p style="margin: 0;">{{b.text}}</p>
+          </sc-if>
+          <sc-if value="{{b.isH}}" hint-placeholder-val="{{ false }}">
+            <h2 style="margin: 24px 0 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 30px; line-height: 1.4; letter-spacing: -.005em; color: {{t.text}};">{{b.text}}</h2>
+          </sc-if>
+          <sc-if value="{{b.isImg}}" hint-placeholder-val="{{ false }}">
+            <figure style="margin: 24px 0; display: flex; flex-direction: column; gap: 14px;">
+              <img src="{{b.src}}" alt="{{b.alt}}" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;">
+              <figcaption style="font-size: 13px; letter-spacing: .1em; font-weight: 400;">{{b.text}}</figcaption>
+            </figure>
+          </sc-if>
+          <sc-if value="{{b.isQuote}}" hint-placeholder-val="{{ false }}">
+            <blockquote style="margin: 32px 0; padding: 40px 0; border-top: 1px solid {{t.text}}; border-bottom: 1px solid {{t.text}}; font-family: 'Noto Serif JP', serif; font-weight: 400; font-size: 24px; line-height: 1.8; letter-spacing: .06em; white-space: pre-line;">{{b.text}}</blockquote>
+          </sc-if>
+        </sc-for>
+        <p style="margin: 0; font-size: 14px; line-height: 1.9;">※肌の状態には個人差があります。気になる症状があるときは、皮膚科専門医に相談してください。</p>
+      </div>
+    </div>
+
+    <!-- products in this story -->
+    <section style="padding: 120px 60px;">
+      <div style="max-width: 960px; margin: 0 auto;">
+        <h2 style="margin: 0 0 40px; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 40px; line-height: 1.1;">In this story</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 32px;">
+          <sc-for list="{{items}}" as="p" hint-placeholder-count="3">
+            <div style="display: flex; gap: 20px; align-items: stretch; background: {{p.ground}}; color: #000000;">
+              <a href="{{p.href}}" style="display: block; width: 40%; flex: none;"><img src="{{p.img}}" alt="{{p.alt}}" style="width: 100%; height: 100%; min-height: 200px; object-fit: cover; display: block;"></a>
+              <div style="padding: 20px 20px 20px 0; display: flex; flex-direction: column; gap: 8px; justify-content: space-between;">
+                <span style="display: flex; flex-direction: column; gap: 6px;">
+                  <span style="font-size: 12px; letter-spacing: .1em; font-weight: 400;">{{p.num}} {{p.line}}</span>
+                  <a href="{{p.href}}" style="color: #000000; text-decoration: none; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 22px; line-height: 1.15;">{{p.name}}</a>
+                  <span style="font-size: 14px; font-weight: 300;">{{p.jp}}　[価格]</span>
+                </span>
+                <button type="button" class="addbtn" onClick="{{p.add}}" style="height: 44px; padding: 0 14px; background: #000000; color: #efe8d7; border: 0; border-radius: 0; font: inherit; font-size: 13px; letter-spacing: .1em; font-weight: 400; cursor: pointer;">{{p.label}}</button>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <!-- related -->
+  <section style="padding: 0 60px 160px;">
+    <div style="max-width: 1320px; margin: 0 auto;">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 48px;">
+        <h2 style="margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 48px; line-height: 1.1; letter-spacing: -.01em;">More stories</h2>
+        <a class="bx" href="Journal.dc.html" style="display: inline-flex; flex-direction: column; gap: 4px; text-decoration: none; color: #efe8d7; font-size: 20px;"><span>記事一覧へ</span><span class="bl" aria-hidden="true" style="display: block; height: 18px; background: #efe8d7; transform-origin: 50% 100%; transition: transform .8s cubic-bezier(.22,1,.36,1);"></span></a>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 40px;">
+        <sc-for list="{{related}}" as="j" hint-placeholder-count="3">
+          <a href="{{j.href}}" style="display: flex; flex-direction: column; gap: 18px; text-decoration: none; color: #efe8d7;">
+            <div style="position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: {{j.color}};">
+              <img src="{{j.hero}}" alt="{{j.heroAlt}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.85);">
+              <span aria-hidden="true" style="position: absolute; left: 0; bottom: 0; width: 56px; height: 12px; background: {{j.color}};"></span>
+            </div>
+            <span style="font-size: 13px; letter-spacing: .1em; font-weight: 400;">{{j.line}} — [公開日]</span>
+            <h3 style="margin: 0; font-size: 20px; line-height: 1.6; font-weight: 300; letter-spacing: .06em;">{{j.flat}}</h3>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <footer style="padding: 60px; border-top: 1px solid #efe8d7;">
+    <div style="max-width: 1320px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 24px 40px; justify-content: space-between; align-items: center; font-size: 13px; letter-spacing: .1em; font-weight: 400;">
+      <span style="font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 24px; letter-spacing: .14em;">KASANE</span>
+      <small style="font-size: 13px;">© KASANE [会社名]</small>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"article":{"editor":"enum","options":["glow","hydrate","night","cream","cleanse"],"default":"hydrate"},"$preview":{"width":1440,"height":4510}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { cart: {} }; }
+  // shared cart: same key on every page (falls back to page state if storage is blocked)
+  loadCart() { try { const v = window.localStorage.getItem('kasane-cart-v1'); return v ? JSON.parse(v) : {}; } catch (e) { return null; } }
+  saveCart(c) { this.setState({ cart: c }); try { window.localStorage.setItem('kasane-cart-v1', JSON.stringify(c)); } catch (e) {} }
+  componentDidMount() {
+    this._sync = () => { const v = this.loadCart(); if (v) this.setState({ cart: v }); };
+    this._sync();
+    try { window.addEventListener('storage', this._sync); window.addEventListener('focus', this._sync); document.addEventListener('visibilitychange', this._sync); } catch (e) {}
+  }
+  componentWillUnmount() { try { window.removeEventListener('storage', this._sync); window.removeEventListener('focus', this._sync); document.removeEventListener('visibilitychange', this._sync); } catch (e) {} }
+  articles() {
+    const H = (text) => ({ type: 'h', text }), P = (text) => ({ type: 'p', text }), Q = (text) => ({ type: 'q', text });
+    const G = (f, alt, text) => ({ type: 'img', src: ({"18350885": "media/pexels-18350885.jpg", "30229022": "media/pexels-30229022.jpg", "34089130": "media/pexels-34089130.jpg", "4121831": "media/pexels-4121831.jpg", "5797999": "media/pexels-5797999.jpg", "6130668": "media/pexels-6130668.jpg", "6167867": "media/pexels-6167867.jpg", "6167873": "media/pexels-6167873.jpg", "6417910": "media/pexels-6417910.jpg", "6496465": "media/pexels-6496465.jpg", "6800941": "media/pexels-6800941.jpg", "7814990": "media/pexels-7814990.jpg", "8015462": "media/pexels-10566524.jpg", "8054395": "media/pexels-8054395.jpg", "8128064": "media/pexels-8128064.jpg", "8217476": "media/pexels-8217476.jpg", "8361478": "media/pexels-8361478.jpg", "8490228": "media/pexels-8490228.jpg", "8533216": "media/pexels-8533216.jpg", "8989964": "media/pexels-8989964.jpg", "9038626": "media/pexels-9038626.jpg"})[f], alt, text });
+    const IMG = (f) => ({"18350885": "media/pexels-18350885.jpg", "30229022": "media/pexels-30229022.jpg", "34089130": "media/pexels-34089130.jpg", "4121831": "media/pexels-4121831.jpg", "5797999": "media/pexels-5797999.jpg", "6130668": "media/pexels-6130668.jpg", "6167867": "media/pexels-6167867.jpg", "6167873": "media/pexels-6167873.jpg", "6417910": "media/pexels-6417910.jpg", "6496465": "media/pexels-6496465.jpg", "6800941": "media/pexels-6800941.jpg", "7814990": "media/pexels-7814990.jpg", "8015462": "media/pexels-10566524.jpg", "8054395": "media/pexels-8054395.jpg", "8128064": "media/pexels-8128064.jpg", "8217476": "media/pexels-8217476.jpg", "8361478": "media/pexels-8361478.jpg", "8490228": "media/pexels-8490228.jpg", "8533216": "media/pexels-8533216.jpg", "8989964": "media/pexels-8989964.jpg", "9038626": "media/pexels-9038626.jpg"})[f];
+    return {
+      glow: { no: '013', line: 'Glow', min: 3, title: 'ツヤは、量より\n置く場所で決まる', hero: IMG('8054395'), heroAlt: '光と影の中の琥珀色のスポイトボトル',
+        items: ['base', 'faceoil', 'cream'],
+        blocks: [
+          P('ツヤを足したいとき、つい顔全体に塗り広げたくなる。でも顔じゅうが光ると、ツヤというよりテカリに見えてしまうことも。ツヤは、量よりも置く場所で決まる。'),
+          H('01 — 光が当たる場所を知る'),
+          P('頬の高いところ、鼻すじ、まぶたの中央、あごの先。顔の中で光が当たりやすいのは、少し前に出ている場所。ツヤを足すなら、まずはこの4か所から。'),
+          H('02 — 下地は、中心から薄く'),
+          P('化粧下地はパール1粒ほどを、顔の中心から外へ薄くのばして。外側にいくほど薄くなるようにすると、顔の中心にだけ、自然な明るさが残る。'),
+          G('8015462', '白いチューブ2本', '下地は、外側ほど薄く。'),
+          H('03 — オイルは、まぜて量を決める'),
+          P('もう少しツヤがほしい日は、クリームや下地にフェイスオイルを1滴まぜてみて。直接塗るよりムラになりにくく、ツヤの強さも調整しやすい。'),
+          Q('ツヤは、量より\n置く場所で決まる。'),
+          H('04 — 夕方の肌で、見直す'),
+          P('夕方に鏡をのぞいて、テカリが気になる場所があれば、翌日はそこを控えめに。乾いて見える場所があれば、そこにだけ1滴分を足してみて。'),
+          G('30229022', '琥珀色のスポイトボトルを上から見たところ', '1滴ずつ、その日の量を選んで。')
+        ] },
+      hydrate: { no: '012', line: 'Hydrate', min: 4, title: '乾燥が気になる季節の、\n化粧水と美容液の重ね方', hero: IMG('9038626'), heroAlt: '頬に美容液をのせる女性',
+        items: ['lotion', 'serum', 'cream'],
+        blocks: [
+          P('空気が乾きはじめると、化粧水をつけた直後はうるおっているのに、しばらくするとつっぱる……そんな日が増えてくる。アイテムを増やす前に、まずは「重ね方」を見直してみる。'),
+          H('01 — 間をあけない'),
+          P('洗顔のあと、タオルで水気を押さえたら、時間をあけずに化粧水へ。洗いたての肌は、何もつけない時間が長いほど乾きやすい。洗面台に化粧水を置いておくだけでも、この「間」はぐっと短くなる。'),
+          H('02 — こすらず、包む'),
+          P('化粧水は手のひらに取って、顔全体を包むようになじませて。パッティングで叩いたり指先で広げたりするより、手のひら全体で包むほうが、肌への摩擦が少なくてすむ。'),
+          G('8989964', '顔を手のひらで包む女性', '手のひら全体で、顔を包むように。'),
+          H('03 — 美容液は「乾きやすい場所」から'),
+          P('美容液は、化粧水がなじんでから重ねる。顔の中心から外へ広げたら、頬や目もとなど乾きを感じやすいところに、もう1度手のひらを当てて。場所によって重ねる回数を変えるほうが、全体にたっぷり塗るよりも少ない量ですむ。'),
+          Q('アイテムを増やす前に、\n重ねる順番と間をととのえて。'),
+          H('04 — 最後に、ふたをする'),
+          P('化粧水と美容液で重ねたうるおいは、最後にクリームで包みこむ。べたつきが気になる日は、クリームを少なめにするか、軽いジェルに替えてみて。季節によって、仕上げのひとつだけを入れ替えるのもいい。')
+        ] },
+      night: { no: '011', line: 'Ritual', min: 4, title: '5分で終える、\n夜の手入れの組み立て方', hero: IMG('6417910'), heroAlt: '鏡の前で手入れをする女性',
+        items: ['oil', 'cream', 'body'],
+        blocks: [
+          P('疲れて帰った夜ほど、お手入れは短くすませたい。でも省きすぎると、翌朝の肌に出てしまう。5分で終えるために、順番と時間の配分を先に決めておく。'),
+          H('01 — 使う順に、左から並べる'),
+          P('洗面台のアイテムを、使う順番どおりに左から並べておく。次に何を使うか考える時間がなくなるだけで、お手入れはずいぶん短くなる。シリーズの色で並べれば、ひと目で順番がわかる。'),
+          H('02 — 落とすのに、2分'),
+          P('クレンジングと洗顔に2分。メイクを落とす日はクレンジングオイルをなじませて、水を加えて白くなったら洗い流す。急いでいる日ほど、こすらないことだけは大切に。'),
+          H('03 — 重ねるのに、2分'),
+          P('化粧水、美容液、クリームを、間をあけずに続けて重ねる。ひとつずつ手のひらで包めば、それぞれ30秒ほどで十分。'),
+          G('8217476', '琥珀色のポンプボトルを押す手', '最後の1分は、顔から体へ。'),
+          Q('短くするのは、手順ではなく\n迷う時間。'),
+          H('04 — 最後の1分は、体へ'),
+          P('顔が終わったら、ボディミルクを手に取って腕や脚に広げる。ほのかな香りが残って、「今日のお手入れはここまで」と、気持ちに区切りがつく。')
+        ] },
+      cream: { no: '010', line: 'Balance', min: 3, title: 'クリームの量は\n「パール1粒」から考える', hero: IMG('6496465'), heroAlt: 'なめらかなクリームのテクスチャー',
+        items: ['cream', 'gel', 'faceoil'],
+        blocks: [
+          P('クリームは、たくさん塗ればいいというものでもない。べたつきが気になって使わなくなるくらいなら、少しから始めて、肌に合わせて足していくほうが続けやすい。'),
+          H('01 — まずは、パール1粒'),
+          P('最初の目安は、パール1粒ほど。手のひらに取ったら、両手を合わせて少し温める。温めてから顔を包むと、少しの量でも全体に広がりやすい。'),
+          G('18350885', '大理石の台にのせたクリームの容器', '手のひらで温めてから、顔を包んで。'),
+          H('02 — 足りない場所にだけ、足す'),
+          P('全体になじませたら、頬や目もと、口もとなど、乾きやすいところにだけ少し重ねて。顔全体の量を増やすより、場所を選んで足すほうがべたつきにくい。'),
+          Q('量を決めるのは、\n季節と、その日の肌。'),
+          H('03 — 季節で、替える'),
+          P('蒸し暑い時期は、軽いジェルクリームに替えてみて。空気が乾く季節は、クリームにフェイスオイルを1滴まぜるのもいい。仕上げのひとつだけを入れ替えれば、お手入れの順番は変えずにすむ。'),
+          H('04 — 翌朝の肌で、見直す'),
+          P('朝起きたとき、肌がべたついていれば量を少なめに。つっぱっていれば、少しだけ足してみて。翌朝の肌が、その夜の量のちょうどよさを教えてくれる。')
+        ] },
+      cleanse: { no: '009', line: 'Cleanse', min: 3, title: 'こすらないクレンジングのための、\n3つの手の動き', hero: IMG('6167867'), heroAlt: '大理石の前の泡ポンプボトル',
+        items: ['oil', 'foam', 'lotion'],
+        blocks: [
+          P('クレンジングで肌をこすってしまうのは、たいてい急いでいるとき。手の動きを3つ決めておくだけで、力を入れなくてもメイクはするりと落ちる。'),
+          H('01 — 乾いた手で、量はたっぷり'),
+          P('クレンジングオイルは、乾いた手と乾いた顔に。量が少ないと指がすべらず、摩擦が増えてしまう。顔全体をおおえるくらいの量を、最初に手に取って。'),
+          G('7814990', 'クレンジングオイルのポンプボトル', '乾いた手に、顔全体をおおえるくらいの量を。'),
+          H('02 — 指の腹で、小さな円を描く'),
+          P('指先ではなく指の腹で、小さな円を描くようにメイクとなじませる。力はいらない。オイルがメイクを浮かせてくれるのを、待つような気持ちで。'),
+          Q('落とすときに、\n力はいらない。'),
+          H('03 — 水を少し加えて、乳化させる'),
+          P('なじんだら、手に少しだけ水をつけて顔に戻す。オイルが白く変わったら、洗い流すサイン。ぬるま湯で、すすぎ残しがないように流して。'),
+          G('8989964', '顔を手のひらで包む女性', '洗顔をするなら、泡をクッションに。'),
+          P('続けて洗顔料を使う日は、泡を顔にのせて転がすように洗う。手のひらが直接肌にふれないことが、こすらないためのいちばんの近道。')
+        ] }
+    };
+  }
+  renderVals() {
+    const T = {
+      Cleanse: { color: '#e83c38', on: '#000000', text: '#e83c38', ground: '#9acbc2' },
+      Hydrate: { color: '#1d8883', on: '#000000', text: '#1d8883', ground: '#d2d2d2' },
+      Balance: { color: '#002a5a', on: '#efe8d7', text: '#efe8d7', ground: '#efe8d7' },
+      Glow: { color: '#6d3969', on: '#efe8d7', text: '#efe8d7', ground: '#e0f8fd' },
+      Ritual: { color: '#f0c1c1', on: '#282b29', text: '#f0c1c1', ground: '#f4c4c4' }
+    };
+    const PR = {
+      oil: { num: '01', line: 'Cleanse', name: 'Cleansing Oil', jp: 'クレンジングオイル', img: 'media/pexels-7814990.jpg', alt: 'クレンジングオイルのボトル' },
+      foam: { num: '01', line: 'Cleanse', name: 'Foam Wash', jp: '泡洗顔料', img: 'media/pexels-6167867.jpg', alt: '黒い泡ポンプボトル' },
+      lotion: { num: '02', line: 'Hydrate', name: 'Lotion', jp: '化粧水', img: 'media/pexels-8128069.jpg', alt: '透明な化粧水のボトル' },
+      serum: { num: '02', line: 'Hydrate', name: 'Serum', jp: '美容液', img: 'media/pexels-6800941.jpg', alt: '美容液のボトル' },
+      cream: { num: '03', line: 'Balance', name: 'Cream', jp: 'クリーム', img: 'media/pexels-18350885.jpg', alt: 'クリームの容器' },
+      gel: { num: '03', line: 'Balance', name: 'Barrier Gel', jp: 'ジェルクリーム', img: 'media/pexels-8533216.jpg', alt: 'グレーのチューブ' },
+      base: { num: '04', line: 'Glow', name: 'Glow Base', jp: '化粧下地', img: 'media/pexels-10566524.jpg', alt: '光の縞が落ちる白いポンプボトル' },
+      faceoil: { num: '04', line: 'Glow', name: 'Face Oil', jp: 'フェイスオイル', img: 'media/pexels-8054395.jpg', alt: '琥珀色のスポイトボトル' },
+      body: { num: '05', line: 'Ritual', name: 'Body Milk', jp: 'ボディミルク', img: 'media/pexels-8217476.jpg', alt: '琥珀色のポンプボトルを押す手' }
+    };
+    const A = this.articles();
+    const id = A[this.props.article] ? this.props.article : 'hydrate';
+    const a = A[id];
+    const t = T[a.line];
+    const cart = this.state.cart;
+    return {
+      a, t,
+      cartCount: Object.values(cart).reduce((x, y) => x + y, 0),
+      nav: [
+        { label: 'Shop', href: 'Shop.dc.html', bar: t.color },
+        { label: 'Lines', href: 'Line.dc.html', bar: t.color },
+        { label: 'About', href: 'About.dc.html', bar: t.color },
+        { label: 'Journal', href: 'Journal.dc.html', bar: '#efe8d7' }
+      ],
+      blocks: a.blocks.map((b) => ({ ...b, isP: b.type === 'p', isH: b.type === 'h', isImg: b.type === 'img', isQuote: b.type === 'q' })),
+      items: a.items.map((k) => ({ ...PR[k], ground: T[PR[k].line].ground, href: 'P-' + k + '.dc.html',
+        label: cart[k] ? 'カートに入れる（' + cart[k] + '）' : 'カートに入れる',
+        add: () => this.saveCart({ ...cart, [k]: (cart[k] || 0) + 1 }) })),
+      related: Object.keys(A).filter((k) => k !== id).map((k) => ({ ...A[k], color: T[A[k].line].color, flat: A[k].title.replace('\n', ''), href: 'J-' + k + '.dc.html' }))
+    };
+  }
+}
+</script>
+</body>
+</html>

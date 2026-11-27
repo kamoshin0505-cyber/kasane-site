@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>KASANE About</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@200;300;400&amp;family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&amp;family=Noto+Sans+JP:wght@200;300;400&amp;family=Noto+Serif+JP:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#000000}
+html{overscroll-behavior-y:auto !important}
+a{color:inherit}
+a:hover{color:inherit}
+.bar{position:relative;display:inline-block;text-decoration:none;padding-bottom:24px;cursor:pointer;background:none;border:0;font:inherit;color:inherit;letter-spacing:inherit}
+.bar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:var(--barh,18px);background:var(--bar,currentColor);transform-origin:50% 100%;transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.bar:hover::after,.bar:focus-visible::after{transform:scaleY(.056)}
+.bar:focus-visible{outline:1px solid #efe8d7;outline-offset:4px}
+.hue{transition:flex-grow 1.4s cubic-bezier(.65,0,.35,1)}
+.hues:hover .hue{flex-grow:1}
+.hues .hue:hover{flex-grow:3}
+.hue-img{transition:transform 1.8s cubic-bezier(.22,1,.36,1)}
+.hue:hover .hue-img{transform:scale(1.05)}
+.wipe{animation:wipe 1.4s cubic-bezier(.65,0,.35,1) both}
+@keyframes wipe{from{clip-path:inset(100% -40% -40% -40%);transform:translateY(20px)}to{clip-path:inset(-40% -40% -40% -40%);transform:none}}
+@media (prefers-reduced-motion: reduce){.wipe{animation:none !important}.hue{transition:none}}
+</style>
+</helmet>
+
+<div style="background: #000000; color: #efe8d7; font-family: 'Albert Sans', 'Noto Sans JP', sans-serif; font-weight: 200; letter-spacing: .08em; font-feature-settings: 'palt'; word-break: auto-phrase; text-wrap: pretty;">
+
+  <!-- hero -->
+  <section style="position: relative; min-height: 900px; overflow: hidden; display: flex; flex-direction: column;">
+    <video ref="{{vidRefA}}" src="media/mixkit-51177.mp4" autoplay muted playsinline preload="auto" aria-label="頬にクリームをなじませる様子" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.45);"></video>
+<video ref="{{vidRefB}}" src="media/mixkit-51177.mp4" muted playsinline preload="auto" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.45);"></video>
+    <div aria-hidden="true" style="position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(0,0,0,0) 30%, rgba(0,0,0,.85) 100%);"></div>
+    <header style="position: relative; z-index: 2; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px 40px; padding: 40px 60px;">
+      <a href="Main.dc.html" style="text-decoration: none; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 30px; letter-spacing: .14em;">KASANE</a>
+      <nav aria-label="メイン" style="display: flex; flex-wrap: wrap; gap: 8px 36px; font-size: 18px; line-height: 22px;">
+        <a class="bar" href="Shop.dc.html" style="--bar: #efe8d7;">Shop</a>
+        <a class="bar" href="Line.dc.html" style="--bar: #efe8d7;">Lines</a>
+        <a class="bar" href="About.dc.html" aria-current="page" style="--bar: #efe8d7;">About</a>
+        <a class="bar" href="Journal.dc.html" style="--bar: #efe8d7;">Journal</a>
+      </nav>
+      <a href="Cart.dc.html" aria-label="カート（{{cartCount}}点）" style="flex: none; width: 76px; height: 76px; border-radius: 50%; border: 1px solid #efe8d7; display: flex; flex-direction: column; gap: 2px; align-items: center; justify-content: center; text-decoration: none; font-size: 13px; letter-spacing: .1em; font-weight: 400;"><span>Cart</span><span>{{cartCount}}</span></a>
+    </header>
+    <div style="position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 60px 100px; gap: 28px; max-width: 1320px; width: 100%; margin: 0 auto; box-sizing: border-box;">
+      <h1 class="wipe" style="margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: clamp(80px, 12vw, 180px); line-height: 1; letter-spacing: -.015em; color: transparent; -webkit-text-stroke: 1px #efe8d7; transform: scaleY(1.1); transform-origin: left bottom;">About</h1>
+      <p style="margin: 0; max-width: 640px; font-family: 'Noto Serif JP', serif; font-weight: 400; font-size: 26px; line-height: 1.7; letter-spacing: .08em;">肌に、色を重ねるように。</p>
+    </div>
+  </section>
+
+  <!-- origin -->
+  <section style="padding: 160px 60px;">
+    <div style="max-width: 1320px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 64px 96px; align-items: flex-start;">
+      <h2 style="flex: 0 1 380px; margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 48px; line-height: 1.1; letter-spacing: -.01em;">Kasane no irome</h2>
+      <div style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 28px; font-size: 18px; line-height: 2;">
+        <p style="margin: 0;">平安の装いには、季節の色を1枚ずつ重ねて着る「襲（かさね）の色目」という楽しみ方があった。表と裏、上と下。重ねた色の組み合わせで、その日の季節や気分を映していた。</p>
+        <p style="margin: 0;">KASANE は、毎日のお手入れをこの重ね方になぞらえて。落とす、満たす、整える、灯す、香る。5つのお手入れにひとつずつ色を添えて、その日の肌に合う色だけを選んで重ねていく。</p>
+        <p style="margin: 0;">ぜんぶそろえなくても、大丈夫。ひとつの色から始めて、季節に合わせて足したり、お休みしたり。そろえることより、選ぶことを大切に。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- five hues -->
+  <section aria-label="5つの色" style="padding: 0 0 160px;">
+    <div class="hues" style="display: flex; flex-wrap: wrap; min-height: 560px;">
+      <sc-for list="{{hues}}" as="h" hint-placeholder-count="5">
+        <a class="hue" href="Line.dc.html" onClick="{{h.pick}}" style="flex: 1 1 200px; min-height: 280px; background: {{h.color}}; color: {{h.on}}; text-decoration: none; padding: 32px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; gap: 24px;">
+          <span style="font-size: 13px; letter-spacing: .1em; font-weight: 400;">{{h.num}}</span>
+          <span style="flex: 1 1 auto; min-height: 240px; position: relative; overflow: hidden; display: block;">
+            <img class="hue-img" src="{{h.img}}" alt="{{h.alt}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;">
+          </span>
+          <span style="display: flex; flex-direction: column; gap: 10px;">
+            <span style="font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 36px; line-height: 1;">{{h.name}}</span>
+            <span style="font-size: 16px; font-weight: 300;">{{h.jp}}</span>
+            <span style="font-size: 14px; line-height: 1.8; font-weight: 300;">{{h.text}}</span>
+          </span>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- making -->
+  <section style="padding: 0 60px 160px;">
+    <div style="max-width: 1320px; margin: 0 auto;">
+      <h2 style="margin: 0 0 56px; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 48px; line-height: 1.1; letter-spacing: -.01em;">Making</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 56px 32px;">
+        <sc-for list="{{making}}" as="m" hint-placeholder-count="3">
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <img src="{{m.img}}" alt="{{m.alt}}" style="width: 100%; aspect-ratio: {{m.ratio}}; object-fit: cover; display: block;">
+            <span style="font-size: 13px; letter-spacing: .1em; font-weight: 400;">{{m.num}}</span>
+            <h3 style="margin: 0; font-size: 22px; line-height: 1.6; font-weight: 300; letter-spacing: .06em;">{{m.title}}</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.9;">{{m.text}}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- company -->
+  <section style="padding: 140px 60px; background: #efe8d7; color: #000000;">
+    <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 48px 96px;">
+      <h2 style="flex: 0 1 300px; margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 48px; line-height: 1.1; letter-spacing: -.01em; color: #002a5a;">Company</h2>
+      <dl style="flex: 1 1 520px; margin: 0; display: grid; grid-template-columns: 140px minmax(0, 1fr); font-size: 16px; line-height: 1.8; font-weight: 300;">
+        <dt style="padding: 18px 0; border-top: 1px solid #002a5a; font-weight: 400;">会社名</dt><dd style="margin: 0; padding: 18px 0; border-top: 1px solid #002a5a;">[会社名]</dd>
+        <dt style="padding: 18px 0; border-top: 1px solid #002a5a; font-weight: 400;">設立</dt><dd style="margin: 0; padding: 18px 0; border-top: 1px solid #002a5a;">[設立年月]</dd>
+        <dt style="padding: 18px 0; border-top: 1px solid #002a5a; font-weight: 400;">所在地</dt><dd style="margin: 0; padding: 18px 0; border-top: 1px solid #002a5a;">[所在地]</dd>
+        <dt style="padding: 18px 0; border-top: 1px solid #002a5a; font-weight: 400;">事業内容</dt><dd style="margin: 0; padding: 18px 0; border-top: 1px solid #002a5a;">化粧品の企画・販売</dd>
+        <dt style="padding: 18px 0; border-top: 1px solid #002a5a; border-bottom: 1px solid #002a5a; font-weight: 400;">お問い合わせ</dt><dd style="margin: 0; padding: 18px 0; border-top: 1px solid #002a5a; border-bottom: 1px solid #002a5a;">[問い合わせ窓口]</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- cta -->
+  <section style="padding: 160px 60px; text-align: center;">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 32px;">
+      <p style="margin: 0; font-family: 'Noto Serif JP', serif; font-weight: 400; font-size: 26px; line-height: 1.7; letter-spacing: .08em;">ひとつの色から、はじめてみる。</p>
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 24px 48px; font-size: 24px;">
+        <a class="bar" href="Shop.dc.html" style="--bar: #efe8d7;">Shop</a>
+        <a class="bar" href="Line.dc.html" style="--bar: #1d8883;">Lines</a>
+      </div>
+    </div>
+  </section>
+
+  <footer style="padding: 60px; border-top: 1px solid #efe8d7;">
+    <div style="max-width: 1320px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 24px 40px; justify-content: space-between; align-items: center; font-size: 13px; letter-spacing: .1em; font-weight: 400;">
+      <span style="font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 24px; letter-spacing: .14em;">KASANE</span>
+      <small style="font-size: 13px;">© KASANE [会社名]</small>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4420}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { cart: {} }; /* seamless loop: two copies of the clip cross-fade, so there is always one playing */ this._v = [null, null]; this._vcur = 0; this._vswap = false; const vTick = (i) => { const v = this._v; if (!v[0] || !v[1] || i !== this._vcur || this._vswap) return; const a = v[i], b = v[1 - i]; const d = a.duration; if (!d || !isFinite(d)) return; if (d - a.currentTime < 1.8) { this._vswap = true; try { b.currentTime = 0; } catch (e) {} const p = b.play(); if (p && p.catch) p.catch(() => {}); b.style.opacity = '1'; a.style.opacity = '0'; this._vcur = 1 - i; setTimeout(() => { try { a.pause(); a.currentTime = 0; } catch (e) {} this._vswap = false; }, 1900); } }; const vAttach = (i, el) => { if (this._v[i] === el) return; this._v[i] = el; if (!el) return; el.muted = true; el.style.transition = 'opacity 1.6s cubic-bezier(.45,0,.2,1)'; el.style.opacity = i === 0 ? '1' : '0'; el.addEventListener('timeupdate', () => vTick(i)); el.addEventListener('ended', () => { if (this._vcur === i) { try { el.currentTime = 0; el.play(); } catch (e) {} } }); }; this.vidRefA = (el) => vAttach(0, el); this.vidRefB = (el) => vAttach(1, el); }
+  // shared cart: same key on every page (falls back to page state if storage is blocked)
+  loadCart() { try { const v = window.localStorage.getItem('kasane-cart-v1'); return v ? JSON.parse(v) : {}; } catch (e) { return null; } }
+  componentDidMount() {
+    this._sync = () => { const v = this.loadCart(); if (v) this.setState({ cart: v }); };
+    this._sync();
+    try { window.addEventListener('storage', this._sync); window.addEventListener('focus', this._sync); document.addEventListener('visibilitychange', this._sync); } catch (e) {}
+  }
+  componentWillUnmount() { try { window.removeEventListener('storage', this._sync); window.removeEventListener('focus', this._sync); document.removeEventListener('visibilitychange', this._sync); } catch (e) {} }
+  pickLine(name) { try { window.localStorage.setItem('kasane-line-v1', name); } catch (e) {} }
+  renderVals() {
+    return {
+      vidRefA: this.vidRefA, vidRefB: this.vidRefB,
+      cartCount: Object.values(this.state.cart).reduce((a, b) => a + b, 0),
+      hues: [
+        { num: '01', name: 'Cleanse', jp: '落とす', color: '#e83c38', on: '#000000', text: '次に重ねる色のために、まっさらな肌へ。', img: 'media/pexels-7814990.jpg', alt: 'クレンジングオイルのボトル' },
+        { num: '02', name: 'Hydrate', jp: '満たす', color: '#1d8883', on: '#000000', text: 'うるおいを、1層ずつ重ねる。', img: 'media/pexels-6800941.jpg', alt: '手のひらにのせた美容液のボトル' },
+        { num: '03', name: 'Balance', jp: '整える', color: '#002a5a', on: '#efe8d7', text: '重ねたうるおいに、そっとふたを。', img: 'media/pexels-18350885.jpg', alt: 'クリームの容器' },
+        { num: '04', name: 'Glow', jp: '灯す', color: '#6d3969', on: '#efe8d7', text: '素肌に、ひとつ明かりを灯して。', img: 'media/pexels-8054395.jpg', alt: '光の中の琥珀色のスポイトボトル' },
+        { num: '05', name: 'Ritual', jp: '香る', color: '#f0c1c1', on: '#282b29', text: 'お手入れの時間を、香りでむすぶ。', img: 'media/pexels-8361478.jpg', alt: '砂浜に置かれた香水瓶' }
+      ].map((h) => ({ ...h, pick: () => this.pickLine(h.name) })),
+      making: [
+        { num: '01 — Formula', title: '1品に、ひとつの役割', text: 'ひとつのアイテムに多くを詰めこまず、役割はひとつにしぼって。組み合わせを変えても、お手入れの順番に迷わないように。', img: 'media/pexels-8490228.jpg', alt: '葉とオイルのボトル', ratio: '4 / 5' },
+        { num: '02 — Package', title: '色で、順番がわかる', text: '容器のラベルには、シリーズの色を1本だけ。洗面台に並べたとき、どれから使うかが色でわかる。', img: 'media/pexels-6167873.jpg', alt: '大理石の上の琥珀色のスプレーボトル', ratio: '4 / 5' },
+        { num: '03 — Try', title: '選ぶ前に、試す', text: '直営店では、すべてのシリーズを試せる。肌のことを話しながら、最初の1色を一緒に選んで。', img: 'media/pexels-6417910.jpg', alt: '鏡の前で手入れをする女性', ratio: '4 / 5' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

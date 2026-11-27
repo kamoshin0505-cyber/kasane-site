@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>KASANE Shop</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@200;300;400&amp;family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&amp;family=Noto+Sans+JP:wght@200;300;400&amp;family=Noto+Serif+JP:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#000000}
+html{overscroll-behavior-y:auto !important}
+a{color:inherit}
+a:hover{color:inherit}
+.bar{position:relative;display:inline-block;text-decoration:none;padding-bottom:24px;cursor:pointer;background:none;border:0;font:inherit;color:inherit;letter-spacing:inherit}
+.bar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:var(--barh,18px);background:var(--bar,currentColor);transform-origin:50% 100%;transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.bar:hover::after,.bar:focus-visible::after{transform:scaleY(.056)}
+.tab{position:relative;background:none;border:0;border-radius:0;padding:10px 0 22px;font:inherit;letter-spacing:inherit;color:#efe8d7;cursor:pointer}
+.tab::after{content:"";position:absolute;left:0;right:0;bottom:0;height:var(--h,1px);background:var(--bar,#efe8d7);transition:height .8s cubic-bezier(.22,1,.36,1)}
+.addbtn{transition:background-color .7s cubic-bezier(.45,0,.2,1)}
+.addbtn:hover{background:#9acbc2 !important}
+.bar:focus-visible,.tab:focus-visible,.addbtn:focus-visible{outline:1px solid #efe8d7;outline-offset:4px}
+.card-img{transition:transform 1.6s cubic-bezier(.22,1,.36,1)}
+.card:hover .card-img{transform:scale(1.04)}
+.wipe{animation:wipe 1.4s cubic-bezier(.65,0,.35,1) both}
+@keyframes wipe{from{clip-path:inset(100% -40% -40% -40%);transform:translateY(20px)}to{clip-path:inset(-40% -40% -40% -40%);transform:none}}
+@media (prefers-reduced-motion: reduce){.wipe{animation:none !important}.card-img{transition:none}}
+</style>
+</helmet>
+
+<div style="background: #000000; color: #efe8d7; font-family: 'Albert Sans', 'Noto Sans JP', sans-serif; font-weight: 200; letter-spacing: .08em; font-feature-settings: 'palt'; word-break: auto-phrase; text-wrap: pretty;">
+
+  <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px 40px; padding: 40px 60px;">
+    <a href="Main.dc.html" style="text-decoration: none; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 30px; letter-spacing: .14em;">KASANE</a>
+    <nav aria-label="メイン" style="display: flex; flex-wrap: wrap; gap: 8px 36px; font-size: 18px; line-height: 22px;">
+      <a class="bar" href="Shop.dc.html" aria-current="page" style="--bar: #efe8d7;">Shop</a>
+      <a class="bar" href="Line.dc.html" style="--bar: #1d8883;">Lines</a>
+      <a class="bar" href="About.dc.html" style="--bar: #1d8883;">About</a>
+      <a class="bar" href="Journal.dc.html" style="--bar: #1d8883;">Journal</a>
+    </nav>
+    <a href="Cart.dc.html" aria-label="カート（{{cartCount}}点）" style="flex: none; width: 76px; height: 76px; border-radius: 50%; border: 1px solid #efe8d7; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; text-decoration: none; font-size: 13px; letter-spacing: .1em; font-weight: 400;"><span>Cart</span><span>{{cartCount}}</span></a>
+  </header>
+
+  <!-- title -->
+  <section style="padding: 60px 60px 40px;">
+    <div style="max-width: 1320px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 32px;">
+      <h1 class="wipe" style="margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: clamp(72px, 10.8vw, 156px); line-height: 1; letter-spacing: -.015em; transform: scaleY(1.1); transform-origin: left bottom; color: {{titleColor}}; transition: color 1.6s cubic-bezier(.65,0,.35,1);">Shop</h1>
+      <p style="margin: 0 0 12px; max-width: 460px; font-size: 18px; line-height: 1.8;">5つのシリーズ、10のアイテム。今日の肌に合う色だけを、選んで重ねてみて。</p>
+    </div>
+  </section>
+
+  <!-- filter -->
+  <section style="padding: 0 60px; position: sticky; top: 0; z-index: 5; background: #000000;">
+    <div style="max-width: 1320px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px 40px; padding-top: 16px;">
+      <div role="group" aria-label="ラインで絞り込む" style="display: flex; flex-wrap: wrap; gap: 4px 36px; font-size: 18px;">
+        <sc-for list="{{tabs}}" as="t" hint-placeholder-count="6">
+          <button class="tab" type="button" aria-pressed="{{t.pressed}}" onClick="{{t.pick}}" style="--bar: {{t.color}}; --h: {{t.h}};">{{t.label}}</button>
+        </sc-for>
+      </div>
+      <p style="margin: 0 0 22px; font-size: 13px; letter-spacing: .1em; font-weight: 400;">{{countLabel}}</p>
+    </div>
+  </section>
+
+  <!-- line banner -->
+  <sc-if value="{{banner}}" hint-placeholder-val="{{ false }}">
+    <section style="padding: 32px 60px 0;">
+      <div style="max-width: 1320px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 20px 40px; padding: 28px 32px; background: {{banner.color}}; color: {{banner.on}};">
+        <span style="font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 34px; line-height: 1;">{{banner.name}}</span>
+        <span style="flex: 1 1 320px; font-size: 16px; line-height: 1.8; font-weight: 300;">{{banner.desc}}</span>
+        <a class="bar" href="Line.dc.html" onClick="{{banner.pick}}" style="--bar: {{banner.on}}; font-size: 16px; padding-bottom: 14px; --barh: 6px;">シリーズを詳しく見る</a>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- grid -->
+  <section style="padding: 56px 60px 120px;">
+    <div style="max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 64px 32px;">
+      <sc-for list="{{items}}" as="p" hint-placeholder-count="9">
+        <article class="card" style="display: flex; flex-direction: column; gap: 16px;">
+          <a href="{{p.href}}" style="position: relative; display: block; aspect-ratio: 4 / 5; overflow: hidden; background: {{p.color}};">
+            <img class="card-img" src="{{p.img}}" alt="{{p.alt}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+            <span style="position: absolute; left: 0; top: 0; padding: 8px 14px; background: {{p.color}}; color: {{p.on}}; font-size: 13px; letter-spacing: .1em; font-weight: 400;">{{p.num}} {{p.line}}</span>
+          </a>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 16px;">
+            <h2 style="margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 26px; line-height: 1.15; letter-spacing: -.01em;">{{p.name}}</h2>
+            <span style="font-size: 13px; letter-spacing: .1em; font-weight: 400; white-space: nowrap;">{{p.vol}}</span>
+          </div>
+          <p style="margin: 0; font-size: 15px; line-height: 1.8;">{{p.jp}}　—　{{p.desc}}</p>
+          <p style="margin: 0; font-size: 16px; font-weight: 300;">[価格（税込）]</p>
+          <button type="button" class="addbtn" onClick="{{p.add}}" style="margin-top: auto; height: 48px; background: #efe8d7; color: #000000; border: 0; border-radius: 0; font: inherit; font-size: 14px; letter-spacing: .12em; font-weight: 400; cursor: pointer;">{{p.label}}</button>
+        </article>
+      </sc-for>
+    </div>
+    <sc-if value="{{toast}}" hint-placeholder-val="{{ false }}">
+      <p role="status" style="max-width: 1320px; margin: 48px auto 0; font-size: 15px; font-weight: 400;">{{toast}}　<a class="bar" href="Cart.dc.html" style="--bar: #efe8d7; padding-bottom: 8px; --barh: 3px;">カートを見る</a></p>
+    </sc-if>
+  </section>
+
+  <!-- sets -->
+  <section style="padding: 0 60px 160px;">
+    <div style="max-width: 1320px; margin: 0 auto;">
+      <h2 style="margin: 0 0 48px; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 48px; line-height: 1.1; letter-spacing: -.01em;">Sets</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(520px, 100%), 1fr)); gap: 32px;">
+        <sc-for list="{{sets}}" as="s" hint-placeholder-count="2">
+          <article style="display: flex; flex-direction: column; background: {{s.ground}}; color: #000000;">
+            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));">
+              <img src="{{s.imgA}}" alt="{{s.altA}}" style="width: 100%; aspect-ratio: 1; object-fit: cover; display: block;">
+              <img src="{{s.imgB}}" alt="{{s.altB}}" style="width: 100%; aspect-ratio: 1; object-fit: cover; display: block;">
+            </div>
+            <div style="padding: 32px; display: flex; flex-direction: column; gap: 14px;">
+              <span style="display: inline-flex; align-self: flex-start; padding: 6px 12px; background: {{s.color}}; color: {{s.on}}; font-size: 13px; letter-spacing: .1em; font-weight: 400;">Set — {{s.line}}</span>
+              <h3 style="margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 32px; line-height: 1.1;">{{s.name}}</h3>
+              <p style="margin: 0; font-size: 16px; line-height: 1.8; font-weight: 300;">{{s.desc}}</p>
+              <p style="margin: 0; font-size: 17px; font-weight: 300;">[セット価格（税込）]</p>
+              <button type="button" class="addbtn" onClick="{{s.add}}" style="align-self: flex-start; height: 52px; padding: 0 36px; background: #000000; color: #efe8d7; border: 0; border-radius: 0; font: inherit; font-size: 15px; letter-spacing: .12em; font-weight: 400; cursor: pointer;">{{s.label}}</button>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <footer style="padding: 60px; border-top: 1px solid #efe8d7;">
+    <div style="max-width: 1320px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 24px 40px; justify-content: space-between; align-items: center; font-size: 13px; letter-spacing: .1em; font-weight: 400;">
+      <span style="font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 24px; letter-spacing: .14em;">KASANE</span>
+      <nav aria-label="フッター" style="display: flex; flex-wrap: wrap; gap: 8px 32px;">
+        <a href="About.dc.html" style="text-decoration: none; padding: 12px 0;">会社情報</a>
+        <a href="Cart.dc.html" style="text-decoration: none; padding: 12px 0;">配送と返品について</a>
+        <a href="About.dc.html" style="text-decoration: none; padding: 12px 0;">特定商取引法に基づく表記</a>
+      </nav>
+      <small style="font-size: 13px;">© KASANE [会社名]</small>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"filter":{"editor":"enum","options":["All","Cleanse","Hydrate","Balance","Glow","Ritual"],"default":"All"},"$preview":{"width":1440,"height":3650}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { filter: props.filter || 'All', cart: {}, toast: '' };
+  }
+  // shared cart: same key on every page (falls back to page state if storage is blocked)
+  loadCart() { try { const v = window.localStorage.getItem('kasane-cart-v1'); return v ? JSON.parse(v) : {}; } catch (e) { return null; } }
+  saveCart(c) { this.setState({ cart: c }); try { window.localStorage.setItem('kasane-cart-v1', JSON.stringify(c)); } catch (e) {} }
+  componentDidMount() {
+    this._sync = () => { const v = this.loadCart(); if (v) this.setState({ cart: v }); };
+    this._sync();
+    try { window.addEventListener('storage', this._sync); window.addEventListener('focus', this._sync); document.addEventListener('visibilitychange', this._sync); } catch (e) {}
+  }
+  componentWillUnmount() { try { window.removeEventListener('storage', this._sync); window.removeEventListener('focus', this._sync); document.removeEventListener('visibilitychange', this._sync); } catch (e) {} }
+  add(id, name) {
+    const c = this.state.cart;
+    this.saveCart({ ...c, [id]: (c[id] || 0) + 1 });
+    this.setState({ toast: name + ' をカートへ。' });
+  }
+  renderVals() {
+    const LINES = {
+      Cleanse: { color: '#e83c38', on: '#000000', desc: '落とす。メイクも1日の名残も、やさしくほどいて洗い流すシリーズ。' },
+      Hydrate: { color: '#1d8883', on: '#000000', desc: '満たす。乾いた肌に、うるおいを1枚ずつ重ねていくシリーズ。' },
+      Balance: { color: '#002a5a', on: '#efe8d7', desc: '整える。ゆらぎやすい季節の肌を、そっと包んでととのえるシリーズ。' },
+      Glow: { color: '#6d3969', on: '#efe8d7', desc: '灯す。素肌の色はそのままに、ほんのりツヤを灯すシリーズ。' },
+      Ritual: { color: '#f0c1c1', on: '#282b29', desc: '香る。1日の終わりを、心地よい香りでむすぶシリーズ。' }
+    };
+    const P = [
+      { id: 'oil', num: '01', line: 'Cleanse', name: 'Cleansing Oil', jp: 'クレンジングオイル', vol: '150mL', img: 'media/pexels-7814990.jpg', alt: '黄土色の壁の前のポンプボトル', desc: 'メイクも今日の名残も、するりとほどく。' },
+      { id: 'foam', num: '01', line: 'Cleanse', name: 'Foam Wash', jp: '泡洗顔料', vol: '150mL', img: 'media/pexels-6167867.jpg', alt: '大理石の前の黒い泡ポンプボトル', desc: '泡にまかせて、ふれずに洗う。' },
+      { id: 'lotion', num: '02', line: 'Hydrate', name: 'Lotion', jp: '化粧水', vol: '200mL', img: 'media/pexels-8128069.jpg', alt: '泡の入った透明な化粧水のボトル', desc: '最初の1層を、さらりと澄んだ化粧水で。' },
+      { id: 'serum', num: '02', line: 'Hydrate', name: 'Serum', jp: '美容液', vol: '30mL', img: 'media/pexels-6800941.jpg', alt: '手のひらにのせた美容液のボトル', desc: '水のように軽い、もう1枚のうるおい。' },
+      { id: 'cream', num: '03', line: 'Balance', name: 'Cream', jp: 'クリーム', vol: '50g', img: 'media/pexels-18350885.jpg', alt: '大理石の台にのせたクリームの容器', desc: 'とろけてほどける、手入れの最後のふた。' },
+      { id: 'gel', num: '03', line: 'Balance', name: 'Barrier Gel', jp: 'ジェルクリーム', vol: '80g', img: 'media/pexels-8533216.jpg', alt: 'グレーのチューブ', desc: 'のばした瞬間、水に変わるジェル。' },
+      { id: 'base', num: '04', line: 'Glow', name: 'Glow Base', jp: '化粧下地', vol: '30g', img: 'media/pexels-10566524.jpg', alt: '光の縞が落ちる白いポンプボトル', desc: '色はのせず、光だけを足す下地。' },
+      { id: 'faceoil', num: '04', line: 'Glow', name: 'Face Oil', jp: 'フェイスオイル', vol: '30mL', img: 'media/pexels-8054395.jpg', alt: '光の中の琥珀色のスポイトボトル', desc: '1滴まぜて、ツヤの量を自分で決める。' },
+      { id: 'body', num: '05', line: 'Ritual', name: 'Body Milk', jp: 'ボディミルク', vol: '250mL', img: 'media/pexels-8217476.jpg', alt: '琥珀色のポンプボトルを押す手', desc: '白茶と杉の香りで、1日を閉じる。' },
+      { id: 'parfum', num: '05', line: 'Ritual', name: 'Eau de Parfum', jp: 'オードパルファム', vol: '50mL', img: 'media/pexels-34089130.jpg', alt: 'すりガラスの香水瓶', desc: '自分だけが気づく、静かな余韻。' }
+    ];
+    const f = this.state.filter;
+    const cart = this.state.cart;
+    const list = P.filter((p) => f === 'All' || p.line === f);
+    const tabNames = ['All', 'Cleanse', 'Hydrate', 'Balance', 'Glow', 'Ritual'];
+    return {
+      cartCount: Object.values(cart).reduce((a, b) => a + b, 0),
+      toast: this.state.toast,
+      titleColor: f === 'All' ? '#efe8d7' : (f === 'Balance' ? '#efe8d7' : f === 'Ritual' ? '#f0c1c1' : f === 'Glow' ? '#efe8d7' : LINES[f].color),
+      countLabel: list.length + ' items',
+      tabs: tabNames.map((t) => ({
+        label: t, pressed: t === f ? 'true' : 'false',
+        color: t === 'All' ? '#efe8d7' : (t === 'Balance' ? '#efe8d7' : t === 'Ritual' ? '#f0c1c1' : LINES[t].color),
+        h: t === f ? '10px' : '1px',
+        pick: () => this.setState({ filter: t })
+      })),
+      banner: f === 'All' ? false : { name: f, color: LINES[f].color, on: LINES[f].on, desc: LINES[f].desc, pick: () => { try { window.localStorage.setItem('kasane-line-v1', f); } catch (e) {} } },
+      items: list.map((p) => ({
+        ...p, color: LINES[p.line].color, on: LINES[p.line].on, href: 'P-' + p.id + '.dc.html',
+        label: cart[p.id] ? 'カートに入れる（' + cart[p.id] + '）' : 'カートに入れる',
+        add: () => this.add(p.id, p.name)
+      })),
+      sets: [
+        { id: 'setHydrate', line: 'Hydrate', color: '#1d8883', on: '#000000', ground: '#d2d2d2', name: 'Lotion + Serum', desc: '化粧水と美容液のセット。うるおいのお手入れを、まとめてはじめられる。', imgA: 'media/pexels-8128069.jpg', altA: '化粧水のポンプボトル', imgB: 'media/pexels-6800941.jpg', altB: '美容液のボトル' },
+        { id: 'setNight', line: 'Balance × Ritual', color: '#002a5a', on: '#efe8d7', ground: '#f4c4c4', name: 'Cream + Body Milk', desc: '顔のクリームとボディミルクのセット。夜のお手入れを、顔から体までひと続きに。', imgA: 'media/pexels-18350885.jpg', altA: 'クリームの容器', imgB: 'media/pexels-8217476.jpg', altB: 'ボディミルクのボトル' }
+      ].map((s) => ({ ...s, label: cart[s.id] ? 'セットをカートに入れる（' + cart[s.id] + '）' : 'セットをカートに入れる', add: () => this.add(s.id, s.name) }))
+    };
+  }
+}
+</script>
+</body>
+</html>

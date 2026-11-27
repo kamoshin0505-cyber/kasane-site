@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>KASANE トップ</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@200;300;400&amp;family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&amp;family=Noto+Sans+JP:wght@200;300;400&amp;family=Noto+Serif+JP:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#000000}
+html{overscroll-behavior-y:auto !important}
+a{color:inherit}
+a:hover{color:inherit}
+.bar{position:relative;display:inline-block;text-decoration:none;padding-bottom:24px;cursor:pointer;background:none;border:0;font:inherit;color:inherit;letter-spacing:inherit}
+.bar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:var(--barh,18px);background:var(--bar,currentColor);transform-origin:50% 100%;transition:transform .8s cubic-bezier(.22,1,.36,1),background-color 1.6s cubic-bezier(.65,0,.35,1)}
+.bar:hover::after,.bar:focus-visible::after{transform:scaleY(.056)}
+.bar:focus-visible{outline:1px solid #efe8d7;outline-offset:6px}
+.wipe{animation:wipe 1.4s cubic-bezier(.65,0,.35,1) both}
+@keyframes wipe{from{clip-path:inset(100% -40% -40% -40%);transform:translateY(20px)}to{clip-path:inset(-40% -40% -40% -40%);transform:none}}
+.addbtn{transition:background-color .7s cubic-bezier(.45,0,.2,1)}
+.addbtn:hover{background:#9acbc2 !important}
+.addbtn:focus-visible{outline:1px solid #efe8d7;outline-offset:4px}
+.ltr{display:inline-block;animation-duration:1.6s;animation-timing-function:cubic-bezier(.22,1,.36,1);animation-fill-mode:both}
+@keyframes rise0{from{transform:translateY(105%)}to{transform:none}}
+@keyframes rise1{from{transform:translateY(105%)}to{transform:none}}
+@keyframes rise2{from{transform:translateY(105%)}to{transform:none}}
+@keyframes rise3{from{transform:translateY(105%)}to{transform:none}}
+@keyframes rise4{from{transform:translateY(105%)}to{transform:none}}
+.cap{animation-duration:2.2s;animation-timing-function:cubic-bezier(.22,1,.36,1);animation-fill-mode:both}
+@keyframes cap0{from{opacity:0;transform:translateY(14px);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
+@keyframes cap1{from{opacity:0;transform:translateY(14px);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
+@keyframes cap2{from{opacity:0;transform:translateY(14px);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
+@keyframes cap3{from{opacity:0;transform:translateY(14px);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
+@keyframes cap4{from{opacity:0;transform:translateY(14px);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
+.prog{animation-duration:9s;animation-timing-function:linear;animation-fill-mode:both}
+@keyframes prog0{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes prog1{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes prog2{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes prog3{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes prog4{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.tile-face{transition:filter .9s cubic-bezier(.45,0,.2,1)}
+.tile:hover .tile-face{filter:brightness(.82)}
+.dot{width:14px;height:14px;border-radius:50%;padding:0;cursor:pointer;border:1px solid;transition:background-color 1.6s cubic-bezier(.65,0,.35,1),border-color 1.6s cubic-bezier(.65,0,.35,1)}
+.field:focus{outline:none;border-bottom-color:#000000}
+.ldraw{stroke-dasharray:100;stroke-dashoffset:100;animation:ldraw 2.4s cubic-bezier(.65,0,.35,1) .2s forwards}
+@keyframes ldraw{to{stroke-dashoffset:0}}
+.lname{animation:lname 1.8s cubic-bezier(.16,1,.3,1) .5s both}
+@keyframes lname{from{opacity:0;letter-spacing:.42em}to{opacity:1;letter-spacing:.2em}}
+@keyframes menuin{from{opacity:0;clip-path:inset(0 0 100% 0)}to{opacity:1;clip-path:inset(0 0 0 0)}}
+.icard-th img{transition:transform 1.4s cubic-bezier(.16,1,.3,1)}
+.icard:hover .icard-th img{transform:scale(1.1)}
+.pnl img{transition:transform 1.4s cubic-bezier(.16,1,.3,1),filter .9s cubic-bezier(.45,0,.2,1)}
+.pnl:hover img{transform:scale(1.06);filter:brightness(.4)}
+.show-sp{display:none !important}
+@media (max-width: 899px){.show-sp{display:flex !important}}
+@media (prefers-reduced-motion: reduce){.ldraw,.lname{animation:none !important;stroke-dashoffset:0}}
+@media (prefers-reduced-motion: reduce){.wipe,.ltr,.cap{animation:none !important}}
+@media (max-width: 899px){.hide-sp{display:none !important}}
+</style>
+</helmet>
+
+<div class="root" id="top" style="background: #000000; color: #efe8d7; font-family: 'Albert Sans', 'Noto Sans JP', sans-serif; font-weight: 200; letter-spacing: .08em; font-feature-settings: 'palt'; word-break: auto-phrase; text-wrap: pretty; min-height: 100%;">
+
+  <!-- ========== STAGE (hero) ========== -->
+  <section aria-label="ブランドの5つのシリーズ" ref="{{stageRef}}" style="position: relative; height: 900px; overflow: hidden; overflow: clip; background: {{stageBg}}; transition: background-color 1.6s cubic-bezier(.65,0,.35,1); touch-action: pan-y;">
+
+    <!-- background photos (cross-fade + pointer parallax) -->
+    <div ref="{{bgRef}}" aria-hidden="true" style="position: absolute; inset: -14px; z-index: 0; opacity: {{bgOp}}; transition: opacity 1.2s cubic-bezier(.45,0,.2,1), transform 1.4s cubic-bezier(.22,1,.36,1);">
+      <sc-for list="{{bgs}}" as="b" hint-placeholder-count="5">
+        <img src="{{b.src}}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness({{b.bright}}); opacity: {{b.op}}; transform: scale({{b.scale}}); transition: opacity 2.6s cubic-bezier(.45,0,.2,1), transform 9s cubic-bezier(.25,.1,.25,1), filter .9s cubic-bezier(.45,0,.2,1);">
+      </sc-for>
+      <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 52%, rgba(0,0,0,.15) 20%, rgba(0,0,0,.85) 100%);"></div>
+    </div>
+
+    <!-- logo + nav (top-left) -->
+    <header style="position: absolute; left: 60px; top: 56px; z-index: 6; display: flex; flex-direction: column; gap: 28px; color: {{headInk}}; mix-blend-mode: {{headBlend}}; transition: color 1.6s cubic-bezier(.65,0,.35,1);">
+      <a href="#top" onClick="{{leave}}" style="align-self: flex-start; text-decoration: none; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 34px; letter-spacing: .14em; color: inherit; clip-path: {{headClip}}; transform: {{headY}}; transition: clip-path 1.4s cubic-bezier(.65,0,.35,1), transform 1.4s cubic-bezier(.65,0,.35,1);">KASANE</a>
+      <nav aria-label="メイン" class="hide-sp" style="display: flex; flex-direction: column; gap: 2px; font-size: 20px; line-height: 24px;">
+        <sc-for list="{{navItems}}" as="n" hint-placeholder-count="4">
+          <a class="bar" href="{{n.href}}" style="--bar: {{barColor}}; align-self: flex-start; color: inherit; clip-path: {{n.clip}}; transform: {{n.y}}; transition: clip-path 1.2s cubic-bezier(.65,0,.35,1) {{n.d}}s, transform 1.2s cubic-bezier(.65,0,.35,1) {{n.d}}s;">{{n.label}}</a>
+        </sc-for>
+      </nav>
+      <button type="button" class="show-sp" onClick="{{openMenu}}" aria-label="メニューを開く" style="align-self: flex-start; width: 44px; height: 44px; padding: 10px 6px; background: none; border: 0; cursor: pointer; flex-direction: column; justify-content: space-between; color: inherit;">
+        <span style="display: block; height: 1px; background: currentColor;"></span>
+        <span style="display: block; height: 1px; background: currentColor;"></span>
+        <span style="display: block; height: 1px; background: currentColor;"></span>
+      </button>
+    </header>
+
+    <!-- top-right: cart circle -->
+    <a href="Cart.dc.html" aria-label="カート（{{cartCount}}点）" style="position: absolute; right: 60px; top: 56px; z-index: 6; width: 76px; height: 76px; border-radius: 50%; border: 1px solid {{barColor}}; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; text-decoration: none; font-size: 13px; letter-spacing: .1em; font-weight: 400; color: {{headInk}}; mix-blend-mode: {{headBlend}}; transform: scale({{cartScale}}); transition: border-color 1.6s cubic-bezier(.65,0,.35,1), color 1.6s cubic-bezier(.65,0,.35,1), transform 1.2s cubic-bezier(.16,1,.3,1);"><span>Cart</span><span>{{cartCount}}</span></a>
+
+    <!-- center: ring + headline + explore (zooms away when entering) -->
+    <div style="position: absolute; inset: 0; z-index: 2; pointer-events: none; transform-origin: 50% 50%; transform: {{centerTf}}; opacity: {{centerOp}}; transition: {{centerTr}};">
+
+      <button type="button" onClick="{{enter}}" onMouseEnter="{{dimOn}}" onMouseLeave="{{dimOff}}" aria-label="{{enterLabel}}" style="position: absolute; left: 50%; top: 50%; width: min(520px, 86%); aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: none; border: 0; padding: 0; cursor: pointer; pointer-events: {{centerPE}};">
+        <svg viewBox="0 0 520 520" width="100%" height="100%" aria-hidden="true" style="display: block; overflow: visible;">
+          <circle cx="260" cy="260" r="249.25" fill="none" stroke="{{c}}" stroke-width="1" pathLength="100" stroke-dasharray="100" stroke-dashoffset="{{ringOff}}" transform="rotate(-90 260 260)" style="transition: stroke-dashoffset 2s cubic-bezier(.87,0,.13,1), stroke 1.6s cubic-bezier(.65,0,.35,1);"></circle>
+          <g style="transform-origin: 260px 260px; transform: rotate({{rot}}deg); transition: transform 1.8s cubic-bezier(.65,0,.35,1);">
+            <circle cx="260" cy="260" r="255.25" fill="none" stroke="{{c}}" stroke-width="12" stroke-dasharray="{{arcDash}} 1603.8" transform="rotate(-90 260 260)" style="transition: stroke-dasharray 2.2s cubic-bezier(.87,0,.13,1) .15s, stroke 1.6s cubic-bezier(.65,0,.35,1);"></circle>
+          </g>
+        </svg>
+      </button>
+
+      <div style="position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-62%); display: flex; justify-content: center;">
+        <h1 aria-live="polite" style="margin: 0; overflow: hidden; padding: .04em .12em .22em; background: {{headBg}}; transition: background-color 1.6s cubic-bezier(.65,0,.35,1);">
+          <span aria-label="{{name}}" style="display: block; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: clamp(64px, 10.8vw, 156px); line-height: 1.04; letter-spacing: -.015em; color: {{headColor}}; transform: scaleY(1.1); transition: color 1.6s cubic-bezier(.65,0,.35,1);">
+            <sc-for list="{{letters}}" as="l" hint-placeholder-count="7"><span aria-hidden="true" style="display: inline-block; transform: {{l.otf}}; transition: {{l.otr}};"><span style="display: inline-block; transform: {{l.tf}}; animation: {{l.anim}};">{{l.ch}}</span></span></sc-for>
+          </span>
+        </h1>
+      </div>
+
+      <div style="position: absolute; left: 50%; top: calc(50% + 150px); transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 56px;">
+        <a class="bar" href="Line.dc.html" onClick="{{explore}}" style="--bar: {{c}}; pointer-events: {{centerPE}}; font-size: 30px; line-height: 30px; letter-spacing: .02em; color: {{ui}}; clip-path: {{exploreClip}}; transform: {{exploreY}}; transition: color 1.6s cubic-bezier(.65,0,.35,1), clip-path 1.4s cubic-bezier(.65,0,.35,1), transform 1.4s cubic-bezier(.65,0,.35,1);">Explore</a>
+        <div role="group" aria-label="シリーズを選ぶ" style="display: flex; gap: 8px; pointer-events: {{centerPE}}; opacity: {{dotsOp}}; transition: opacity 1.4s cubic-bezier(.45,0,.2,1);">
+          <sc-for list="{{dots}}" as="d" hint-placeholder-count="5">
+            <button class="dot" type="button" aria-label="{{d.label}}" onClick="{{d.pick}}" style="background: {{d.bg}}; border-color: {{c}};"></button>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <!-- bottom-left: controls (index view) -->
+    <div style="position: absolute; left: 60px; bottom: 96px; z-index: 4; display: flex; gap: 28px; font-size: 13px; letter-spacing: .1em; font-weight: 400; opacity: {{ctrlOp}}; pointer-events: {{centerPE}}; transition: opacity 1s cubic-bezier(.45,0,.2,1);">
+      <button type="button" onClick="{{prev}}" style="background: none; border: 0; color: #efe8d7; font: inherit; letter-spacing: inherit; cursor: pointer; padding: 12px 0;">Prev</button>
+      <button type="button" onClick="{{next}}" style="background: none; border: 0; color: #efe8d7; font: inherit; letter-spacing: inherit; cursor: pointer; padding: 12px 0;">Next</button>
+      <button type="button" onClick="{{togglePause}}" aria-label="{{pauseLabel}}" style="background: none; border: 0; color: #efe8d7; font: inherit; letter-spacing: inherit; cursor: pointer; padding: 12px 0;">{{pauseText}}</button>
+      <span class="hide-sp" style="padding: 12px 0; color: #efe8d7;">{{num}} / 05</span>
+    </div>
+
+    <!-- catch copy (index view) -->
+    <div style="position: absolute; left: 0; right: 0; bottom: 40px; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; padding: 0 24px; pointer-events: none; opacity: {{ctrlOp}}; transition: opacity 1s cubic-bezier(.45,0,.2,1);">
+      <p aria-live="polite" class="cap" style="margin: 0; animation-name: cap{{idx}}; animation-delay: .6s; font-family: 'Noto Serif JP', serif; font-weight: 400; font-size: clamp(20px, 2vw, 26px); line-height: 1.5; letter-spacing: .16em; color: {{leadColor}}; transition: color 1.6s cubic-bezier(.65,0,.35,1);">{{catch}}</p>
+      <p class="cap" style="margin: 0; animation-name: cap{{idx}}; animation-delay: .9s; font-size: 12px; letter-spacing: .14em; font-weight: 400; color: #efe8d7;">{{sub}}</p>
+      <span aria-hidden="true" style="position: relative; display: block; width: 160px; height: 1px; margin-top: 6px; background: rgba(239,232,215,.28); overflow: hidden;">
+        <span class="prog" style="position: absolute; inset: 0; background: {{c}}; transform-origin: left center; animation-name: prog{{idx}}; animation-play-state: {{playState}};"></span>
+      </span>
+    </div>
+    <p style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); margin: 0;">{{lead}}</p>
+
+    <!-- ===== inner view (after zooming into the ring) ===== -->
+    <div aria-hidden="{{innerHidden}}" style="position: absolute; inset: 0; z-index: 3; pointer-events: {{innerPE}}; opacity: {{innerOp}}; transition: opacity .9s cubic-bezier(.45,0,.2,1) {{innerDelay}}s;">
+      <p aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 190px; margin: 0; text-align: center; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: clamp(96px, 15vw, 220px); line-height: 1; letter-spacing: -.015em; color: transparent; -webkit-text-stroke: 1px {{c}}; white-space: nowrap; transform: scaleY(1.1); transform-origin: center top;">{{name}}</p>
+      <div style="position: absolute; left: 0; right: 0; top: 215px; display: flex; flex-wrap: wrap; justify-content: center; gap: 24px 0; padding: 0 60px;">
+        <sc-for list="{{innerCards}}" as="k" hint-placeholder-count="2">
+          <a class="icard" href="{{k.href}}" style="display: flex; gap: 22px; align-items: flex-end; width: min(440px, 40%); aspect-ratio: 560 / 396; box-sizing: border-box; padding: 22px; margin-top: {{k.mt}}; margin-left: {{k.ml}}; background: {{c}}; color: {{k.on}}; text-decoration: none; opacity: {{k.op}}; transform: {{k.tf}}; transition: opacity 1s cubic-bezier(.45,0,.2,1) {{k.d}}s, transform 1.6s cubic-bezier(.16,1,.3,1) {{k.d}}s;">
+            <span class="icard-th" style="display: block; width: 53%; height: 100%; overflow: hidden;"><img src="{{k.img}}" alt="{{k.alt}}" style="width: 100%; height: 100%; object-fit: cover; display: block;"></span>
+            <span style="display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-size: 13px; letter-spacing: .1em; font-weight: 400;">{{num}} / {{name}}</span>
+              <span style="font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 28px; line-height: 1.05;">{{k.name}}</span>
+              <span style="font-size: 14px;">{{k.jp}}</span>
+            </span>
+          </a>
+        </sc-for>
+      </div>
+      <button type="button" class="bar" onClick="{{leave}}" style="position: absolute; left: 60px; bottom: 90px; --bar: {{c}}; color: #000000; font-size: 13px; letter-spacing: .1em; font-weight: 400;">Back to Lines</button>
+      <a class="bar" href="Line.dc.html" onClick="{{explore}}" style="position: absolute; left: 50%; bottom: 60px; transform: translateX(-50%); --bar: {{c}}; color: #000000; font-family: 'Noto Serif JP', serif; font-size: 20px; letter-spacing: .14em; white-space: nowrap;">{{catch}}　—　{{name}} を見る</a>
+    </div>
+
+    <!-- ===== mobile menu ===== -->
+    <sc-if value="{{menuOpen}}" hint-placeholder-val="{{ false }}">
+      <div role="dialog" aria-label="メニュー" style="position: absolute; inset: 0; z-index: 30; display: flex; background: #000000; animation: menuin .9s cubic-bezier(.16,1,.3,1) both;">
+        <div style="flex: 0 0 44%; box-sizing: border-box; padding: 32px 24px; display: flex; flex-direction: column; gap: 20px; font-size: 20px;">
+          <button type="button" onClick="{{closeMenu}}" aria-label="メニューを閉じる" style="align-self: flex-start; width: 44px; height: 44px; background: none; border: 0; color: #efe8d7; font-size: 28px; cursor: pointer; padding: 0;">×</button>
+          <a class="bar" href="Shop.dc.html" style="--bar: {{c}}; align-self: flex-start;">Shop</a>
+          <a class="bar" href="Line.dc.html" style="--bar: {{c}}; align-self: flex-start;">Lines</a>
+          <a class="bar" href="About.dc.html" style="--bar: {{c}}; align-self: flex-start;">About</a>
+          <a class="bar" href="Journal.dc.html" style="--bar: {{c}}; align-self: flex-start;">Journal</a>
+          <a class="bar" href="Cart.dc.html" style="--bar: {{c}}; align-self: flex-start;">Cart {{cartCount}}</a>
+        </div>
+        <div style="flex: 1; display: flex; flex-direction: column;">
+          <sc-for list="{{menuPanels}}" as="m" hint-placeholder-count="5">
+            <button type="button" class="pnl" onClick="{{m.pick}}" style="flex: 1; position: relative; overflow: hidden; border: 0; border-bottom: 1px solid rgba(239,232,215,.12); padding: 0; background: #000000; cursor: pointer;">
+              <img src="{{m.src}}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.55);">
+              <span style="position: relative; display: grid; place-items: center; height: 100%; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 30px; color: #efe8d7; transform: scaleY(1.1);">{{m.name}}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ===== loader ===== -->
+    <sc-if value="{{showLoader}}" hint-placeholder-val="{{ false }}">
+      <div aria-hidden="true" style="position: absolute; inset: 0; z-index: 40; background: #002a5a; display: grid; place-items: center; transform: {{loaderTf}}; transition: transform 1.2s cubic-bezier(.65,0,.35,1);">
+        <div style="position: relative; width: min(360px, 70%); aspect-ratio: 1;">
+          <svg viewBox="0 0 400 400" width="100%" height="100%" style="display: block; transform: rotate(-90deg);"><circle class="ldraw" cx="200" cy="200" r="199" fill="none" stroke="#efe8d7" stroke-width="1" pathLength="100"></circle></svg>
+          <span class="lname" style="position: absolute; inset: 0; display: grid; place-items: center; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 32px; color: #efe8d7;">KASANE</span>
+        </div>
+      </div>
+    </sc-if>
+  </section>
+
+  <!-- ========== LINES ========== -->
+  <section id="lines" style="padding: 160px 60px 140px; max-width: 1440px; margin: 0 auto; box-sizing: border-box;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 32px; margin-bottom: 72px;">
+      <h2 style="margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 48px; line-height: 1.1; letter-spacing: -.01em; color: #efe8d7;">Lines</h2>
+      <p style="margin: 0; max-width: 520px; font-size: 18px; line-height: 1.8;">お手入れを5つのステップに分けて、ひとつずつ色を添えて。</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px;">
+      <sc-for list="{{lines}}" as="ln" hint-placeholder-count="5">
+        <a class="tile" href="Line.dc.html" onClick="{{ln.pick}}" style="display: flex; flex-direction: column; gap: 22px; text-decoration: none; color: #efe8d7;">
+          <div class="tile-face" style="position: relative; container-type: inline-size; height: 320px; background: {{ln.color}}; overflow: hidden;">
+            <img src="{{ln.tilePhoto}}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) brightness({{ln.tb}}) contrast(.85); mix-blend-mode: {{ln.blend}}; opacity: {{ln.top}};">
+            <span style="position: absolute; left: 0; top: 0; padding: 8px 14px; background: {{ln.color}}; font-size: 13px; letter-spacing: .1em; font-weight: 400; color: {{ln.numColor}};">{{ln.num}}</span>
+            <span aria-hidden="true" style="position: absolute; left: 14px; bottom: 14px; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: min(116px, 24cqw); line-height: 1; letter-spacing: -.015em; color: transparent; -webkit-text-stroke: 1px {{ln.stroke}}; transform: scaleY(1.1); transform-origin: left bottom; white-space: nowrap;">{{ln.name}}</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <h3 style="margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 28px; line-height: 1.1; letter-spacing: -.01em;">{{ln.name}}<span style="font-family: 'Albert Sans', 'Noto Sans JP', sans-serif; font-weight: 300; font-size: 15px; letter-spacing: .08em; margin-left: 12px;">{{ln.jp}}</span></h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.8;">{{ln.desc}}</p>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ========== SHOP (featured products) ========== -->
+  <section id="shop" style="padding: 40px 60px 100px;">
+    <div style="max-width: 1320px; margin: 0 auto;">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 32px; margin-bottom: 56px;">
+        <h2 style="margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 48px; line-height: 1.1; letter-spacing: -.01em;">Shop</h2>
+        <a class="bar" href="Shop.dc.html" style="--bar: #efe8d7; font-size: 20px; line-height: 24px;">全10品を見る</a>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr)); gap: 56px 32px;">
+        <sc-for list="{{featured}}" as="p" hint-placeholder-count="6">
+          <article style="display: flex; flex-direction: column; gap: 16px;">
+            <a href="{{p.href}}" style="position: relative; display: block; aspect-ratio: 4 / 5; overflow: hidden; background: {{p.color}};">
+              <img src="{{p.img}}" alt="{{p.alt}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+              <span style="position: absolute; left: 0; top: 0; padding: 8px 14px; background: {{p.color}}; color: {{p.on}}; font-size: 13px; letter-spacing: .1em; font-weight: 400;">{{p.num}} {{p.line}}</span>
+            </a>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 16px;">
+              <h3 style="margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 26px; line-height: 1.15; letter-spacing: -.01em;">{{p.name}}</h3>
+              <span style="font-size: 13px; letter-spacing: .1em; font-weight: 400; white-space: nowrap;">{{p.vol}}</span>
+            </div>
+            <p style="margin: 0; font-size: 15px; line-height: 1.7;">{{p.jp}}　{{p.price}}</p>
+            <button type="button" onClick="{{p.add}}" class="addbtn" style="margin-top: auto; height: 48px; background: #efe8d7; color: #000000; border: 0; border-radius: 0; font: inherit; font-size: 14px; letter-spacing: .12em; font-weight: 400; cursor: pointer;">{{p.addLabel}}</button>
+          </article>
+        </sc-for>
+      </div>
+      <sc-if value="{{toast}}" hint-placeholder-val="{{ false }}">
+        <p role="status" style="margin: 40px 0 0; font-size: 15px; font-weight: 400;">{{toast}}　<a class="bar" href="Cart.dc.html" style="--bar: #efe8d7; padding-bottom: 8px; --barh: 3px;">カートを見る</a></p>
+      </sc-if>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT ========== -->
+  <section id="about" style="position: relative; overflow: hidden; padding: 160px 60px; background: #000000;">
+    <div style="max-width: 1320px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 64px; align-items: center;">
+      <div style="flex: 1 1 520px; min-width: 0; position: relative; aspect-ratio: 4 / 5; max-height: 720px; overflow: hidden; background: #000000;">
+        <video ref="{{vidRefA}}" src="media/mixkit-51177.mp4" autoplay muted playsinline preload="auto" aria-label="頬にクリームをなじませる様子" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.55) grayscale(.2);"></video>
+<video ref="{{vidRefB}}" src="media/mixkit-51177.mp4" muted playsinline preload="auto" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.55) grayscale(.2);"></video>
+        <div aria-hidden="true" style="position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(0,0,0,.8) 100%);"></div>
+        <p aria-hidden="true" style="position: absolute; left: 24px; bottom: 32px; margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: clamp(64px, 8vw, 132px); line-height: 1; letter-spacing: -.015em; color: transparent; -webkit-text-stroke: 1px #efe8d7; transform: scaleY(1.1); transform-origin: left bottom;">Layered</p>
+      </div>
+      <div style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 28px;">
+        <h2 style="margin: 0; font-family: 'Noto Serif JP', serif; font-weight: 400; font-size: 32px; line-height: 1.6; letter-spacing: .06em;">肌に、色を重ねるように。</h2>
+        <p style="margin: 0; font-size: 18px; line-height: 1.9;">KASANE という名前は、季節の色を1枚ずつ重ねて装う「襲（かさね）の色目」から。落とす、満たす、整える、灯す、香る。お手入れのひとつひとつを色に見立てて、その日の肌に合う色だけを選んで重ねていく。</p>
+        <p style="margin: 0; font-size: 18px; line-height: 1.9;">ぜんぶそろえなくても、大丈夫。5つのシリーズは、どれから始めても、どんな組み合わせでも使えるように。</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 24px 40px;">
+          <a class="bar" href="About.dc.html" style="--bar: #efe8d7; font-size: 20px; line-height: 24px;">About KASANE</a>
+          <a class="bar" href="#ritual" style="--bar: #efe8d7; font-size: 20px; line-height: 24px;">Our Ritual</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== RITUAL ========== -->
+  <section id="ritual" style="padding: 140px 60px; background: #efe8d7; color: #000000;">
+    <div style="max-width: 1320px; margin: 0 auto;">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 32px; margin-bottom: 72px;">
+        <h2 style="margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 48px; line-height: 1.1; letter-spacing: -.01em; color: #002a5a;">Ritual</h2>
+        <p style="margin: 0; max-width: 520px; font-size: 18px; line-height: 1.8; font-weight: 300;">朝と夜で、重ねる色を少しだけ変えてみる。そんな手順のひとつ。</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 48px 64px;">
+        <div style="display: flex; flex-direction: column;">
+          <h3 style="margin: 0 0 24px; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 30px; letter-spacing: -.01em; color: #002a5a;">Morning</h3>
+          <sc-for list="{{morning}}" as="s" hint-placeholder-count="3">
+            <div style="display: flex; gap: 24px; align-items: center; padding: 22px 0; border-top: 1px solid #002a5a;">
+              <span aria-hidden="true" style="width: 14px; height: 14px; border-radius: 50%; background: {{s.color}}; flex: none;"></span>
+              <span style="font-size: 13px; letter-spacing: .1em; font-weight: 400; width: 28px;">{{s.step}}</span>
+              <span style="font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 22px; width: 120px;">{{s.name}}</span>
+              <span style="font-size: 16px; line-height: 1.7; font-weight: 300;">{{s.text}}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <h3 style="margin: 0 0 24px; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 30px; letter-spacing: -.01em; color: #002a5a;">Night</h3>
+          <sc-for list="{{night}}" as="s" hint-placeholder-count="4">
+            <div style="display: flex; gap: 24px; align-items: center; padding: 22px 0; border-top: 1px solid #002a5a;">
+              <span aria-hidden="true" style="width: 14px; height: 14px; border-radius: 50%; background: {{s.color}}; flex: none;"></span>
+              <span style="font-size: 13px; letter-spacing: .1em; font-weight: 400; width: 28px;">{{s.step}}</span>
+              <span style="font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 22px; width: 120px;">{{s.name}}</span>
+              <span style="font-size: 16px; line-height: 1.7; font-weight: 300;">{{s.text}}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== JOURNAL ========== -->
+  <section id="journal" style="padding: 160px 60px 140px;">
+    <div style="max-width: 1320px; margin: 0 auto;">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 32px; margin-bottom: 64px;">
+        <h2 style="margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 48px; line-height: 1.1; letter-spacing: -.01em;">Journal</h2>
+        <a class="bar" href="#journal" style="--bar: #efe8d7; font-size: 20px; line-height: 24px;">View all</a>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+        <sc-for list="{{journal}}" as="j" hint-placeholder-count="3">
+          <a href="{{j.href}}" style="display: flex; flex-direction: column; gap: 20px; text-decoration: none; color: #efe8d7;">
+            <div style="position: relative; aspect-ratio: 4 / 3; background: {{j.bg}}; overflow: hidden;">
+              <img src="{{j.src}}" alt="{{j.photo}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.85);">
+              <span aria-hidden="true" style="position: absolute; left: 0; bottom: 0; width: 56px; height: 12px; background: {{j.bg}};"></span>
+            </div>
+            <span style="font-size: 13px; letter-spacing: .1em; font-weight: 400;">{{j.cat}} — [公開日]</span>
+            <h3 style="margin: 0; font-size: 20px; line-height: 1.6; font-weight: 300; letter-spacing: .06em;">{{j.title}}</h3>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STORE / NEWSLETTER ========== -->
+  <section id="store" style="padding: 140px 60px; background: #9acbc2; color: #000000;">
+    <div style="max-width: 1320px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 64px; justify-content: space-between;">
+      <div style="flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 24px;">
+        <h2 style="margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 48px; line-height: 1.1; letter-spacing: -.01em;">Store</h2>
+        <p style="margin: 0; font-size: 18px; line-height: 1.8; font-weight: 300;">オンラインストアのほか、直営店ではすべてのシリーズを試せる。肌のことも、気軽に相談を。</p>
+        <dl style="margin: 0; display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 14px 24px; font-size: 16px; line-height: 1.7; font-weight: 300;">
+          <dt style="font-weight: 400;">直営店</dt><dd style="margin: 0;">[店舗名・住所]</dd>
+          <dt style="font-weight: 400;">営業時間</dt><dd style="margin: 0;">[営業時間]</dd>
+          <dt style="font-weight: 400;">お問い合わせ</dt><dd style="margin: 0;">[問い合わせ窓口]</dd>
+        </dl>
+        <a class="bar" href="Shop.dc.html" style="--bar: #000000; align-self: flex-start; font-size: 20px; line-height: 24px; margin-top: 12px;">Online Store</a>
+      </div>
+      <form style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 20px;" onSubmit="{{subscribe}}">
+        <h3 style="margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 30px; letter-spacing: -.01em;">Letter</h3>
+        <p style="margin: 0; font-size: 16px; line-height: 1.8; font-weight: 300;">新しい色のお知らせと、季節のお手入れのたよりを、月に1度。</p>
+        <label for="mail" style="font-size: 13px; letter-spacing: .1em; font-weight: 400;">メールアドレス</label>
+        <div style="display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap;">
+          <input id="mail" class="field" type="email" placeholder="name@example.com" style="flex: 1 1 240px; min-width: 0; height: 48px; background: transparent; border: 0; border-bottom: 1px solid #000000; color: #000000; font: inherit; font-size: 18px; letter-spacing: .04em; padding: 0; border-radius: 0;">
+          <button type="submit" style="height: 48px; padding: 0 28px; background: #000000; color: #efe8d7; border: 0; border-radius: 0; font: inherit; font-size: 15px; letter-spacing: .1em; font-weight: 400; cursor: pointer;">登録する</button>
+        </div>
+        <sc-if value="{{sent}}" hint-placeholder-val="{{ false }}">
+          <p role="status" style="margin: 0; font-size: 15px; font-weight: 400;">ありがとう。確認のメールを届けたので、受信箱をのぞいてみて。</p>
+        </sc-if>
+      </form>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer style="padding: 80px 60px 60px; background: #000000;">
+    <div style="max-width: 1320px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; align-items: flex-end;">
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <span style="font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 34px; letter-spacing: .14em;">KASANE</span>
+        <div style="display: flex; gap: 10px;" aria-hidden="true">
+          <span style="width: 14px; height: 14px; border-radius: 50%; background: #e83c38;"></span>
+          <span style="width: 14px; height: 14px; border-radius: 50%; background: #1d8883;"></span>
+          <span style="width: 14px; height: 14px; border-radius: 50%; background: #002a5a; border: 1px solid #efe8d7; box-sizing: border-box;"></span>
+          <span style="width: 14px; height: 14px; border-radius: 50%; background: #6d3969;"></span>
+          <span style="width: 14px; height: 14px; border-radius: 50%; background: #f0c1c1;"></span>
+        </div>
+      </div>
+      <nav aria-label="フッター" style="display: flex; flex-wrap: wrap; gap: 12px 40px; font-size: 13px; letter-spacing: .1em; font-weight: 400;">
+        <a href="#about" style="text-decoration: none; padding: 12px 0;">会社情報</a>
+        <a href="#store" style="text-decoration: none; padding: 12px 0;">特定商取引法に基づく表記</a>
+        <a href="#store" style="text-decoration: none; padding: 12px 0;">プライバシーポリシー</a>
+        <a href="#store" style="text-decoration: none; padding: 12px 0;">お問い合わせ</a>
+      </nav>
+      <small style="font-size: 13px; letter-spacing: .1em; width: 100%;">© KASANE [会社名]</small>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"start":{"editor":"enum","options":["Cleanse","Hydrate","Balance","Glow","Ritual"],"default":"Cleanse"},"intro":{"editor":"boolean","default":true},"$preview":{"width":1440,"height":7070}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const names = ['Cleanse', 'Hydrate', 'Balance', 'Glow', 'Ritual'];
+    const i = names.indexOf(props.start);
+    const idx = i < 0 ? 0 : i;
+    this.state = {
+      idx, rot: idx * 72, sent: false, dim: false, cart: {}, toast: '', hover: false, userPaused: false,
+      // intro sequence
+      loader: true, loaderOut: false, iHead: false, iRing: false, iLetters: false, iExplore: false, iDots: false, ready: false,
+      // headline letters
+      out: false, order: [], inOrder: this.shuffle(names[idx].length),
+      // views
+      view: 'index', menuOpen: false
+    };
+    this.DUR = 9000;          // ms each series stays before the slow auto-advance
+    this._remain = this.DUR;
+    this._idx = idx;
+    this._timers = [];
+    this._busy = false;
+    this._acc = 0; this._accT = 0; this._p0 = null; this._raf = 0;
+    this.stageRef = (el) => this.attachStage(el);
+    this.bgRef = (el) => { this._bg = el; };
+    // loops fade out to the ground and back in, instead of cutting
+    /* seamless loop: two copies of the clip cross-fade, so there is always one playing */ this._v = [null, null]; this._vcur = 0; this._vswap = false; const vTick = (i) => { const v = this._v; if (!v[0] || !v[1] || i !== this._vcur || this._vswap) return; const a = v[i], b = v[1 - i]; const d = a.duration; if (!d || !isFinite(d)) return; if (d - a.currentTime < 1.8) { this._vswap = true; try { b.currentTime = 0; } catch (e) {} const p = b.play(); if (p && p.catch) p.catch(() => {}); b.style.opacity = '1'; a.style.opacity = '0'; this._vcur = 1 - i; setTimeout(() => { try { a.pause(); a.currentTime = 0; } catch (e) {} this._vswap = false; }, 1900); } }; const vAttach = (i, el) => { if (this._v[i] === el) return; this._v[i] = el; if (!el) return; el.muted = true; el.style.transition = 'opacity 1.6s cubic-bezier(.45,0,.2,1)'; el.style.opacity = i === 0 ? '1' : '0'; el.addEventListener('timeupdate', () => vTick(i)); el.addEventListener('ended', () => { if (this._vcur === i) { try { el.currentTime = 0; el.play(); } catch (e) {} } }); }; this.vidRefA = (el) => vAttach(0, el); this.vidRefB = (el) => vAttach(1, el);
+  }
+
+  // ---------- helpers ----------
+  shuffle(n) { const a = []; for (let i = 0; i < n; i++) a.push(i); for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  later(fn, ms) { this._timers.push(setTimeout(fn, ms)); }
+  pickLine(name) { try { window.localStorage.setItem('kasane-line-v1', name); } catch (e) {} }
+
+  // ---------- auto advance (pauses on ring hover, Pause, inner view, reduced motion) ----------
+  isPaused(s) { return !!(s.hover || s.userPaused || this._reduce || s.view !== 'index' || !s.ready); }
+  schedule(s) {
+    clearTimeout(this._t);
+    if (this.isPaused(s || this.state)) return;
+    this._start = Date.now();
+    this._t = setTimeout(() => this.go(this._idx + 1, 1), this._remain);
+  }
+  halt() {
+    clearTimeout(this._t);
+    if (this._start) this._remain = Math.max(400, this._remain - (Date.now() - this._start));
+    this._start = 0;
+  }
+  setPause(patch) {
+    const next = { ...this.state, ...patch };
+    const was = this.isPaused(this.state), now = this.isPaused(next);
+    this.setState(patch);
+    if (was !== now) { if (now) this.halt(); else this.schedule(next); }
+  }
+
+  // ---------- switching: letters leave (shuffled, upward), then colours/ring/photo swap and letters rise in ----------
+  go(target, dir) {
+    const n = (target + 5) % 5;
+    const s = this.state;
+    if (this._busy || s.view !== 'index' || !s.ready || n === s.idx) return;
+    this._busy = true;
+    clearTimeout(this._t);
+    const L = this.baseLines();
+    const len = L[s.idx].name.length;
+    this.setState({ out: true, order: this.shuffle(len) });
+    const outMs = len * 30 + 380;
+    this.later(() => {
+      let d = ((n - this.state.idx) + 5) % 5;
+      if (dir === -1) d = d - 5; else if (dir !== 1 && d > 2) d = d - 5;
+      this._idx = n;
+      this.setState({ idx: n, out: false, inOrder: this.shuffle(L[n].name.length), rot: this.state.rot + d * 72 });
+      this._remain = this.DUR;
+      this.schedule({ ...this.state, view: 'index', ready: true });
+      this.later(() => { this._busy = false; }, 1100);
+    }, outMs);
+  }
+
+  // ---------- inner view (zoom into the ring) ----------
+  enter() {
+    if (this._busy || this.state.view !== 'index' || !this.state.ready) return;
+    this._busy = true;
+    this.halt();
+    this.setState({ view: 'zoom', dim: false, hover: false });
+    this.later(() => this.setState({ view: 'in' }), 700);
+    this.later(() => { this._busy = false; }, 1700);
+  }
+  leave(e) {
+    if (this.state.view === 'index') return;
+    if (e && e.preventDefault) e.preventDefault();
+    this._busy = true;
+    this.setState({ view: 'index' });
+    this._remain = this.DUR;
+    this.later(() => { this._busy = false; this.schedule(); }, 1300);
+  }
+
+  // ---------- input: wheel / horizontal swipe / drag (edges hand the wheel back to the page) ----------
+  attachStage(el) {
+    if (this._st === el) return;
+    if (this._st) this.detachStage();
+    this._st = el;
+    if (!el) return;
+    this._onWheel = (e) => {
+      if (this.state.view !== 'index' || !this.state.ready || this.state.menuOpen) return;
+      const horiz = Math.abs(e.deltaX) > Math.abs(e.deltaY);
+      const delta = horiz ? e.deltaX : e.deltaY;
+      const dir = delta > 0 ? 1 : -1;
+      if (!horiz) return; // vertical wheel always scrolls the page; categories change by horizontal swipe, drag or the controls
+      e.preventDefault();
+      const now = Date.now();
+      if (now - this._accT > 220) this._acc = 0;
+      this._accT = now;
+      this._acc += delta;
+      if (Math.abs(this._acc) > 40) { this._acc = 0; this.go(this.state.idx + dir, dir); }
+    };
+    this._onDown = (e) => {
+      if (e.target && e.target.closest && e.target.closest('a,button')) return;
+      this._p0 = { x: e.clientX, y: e.clientY };
+    };
+    this._onUp = (e) => {
+      if (!this._p0) return;
+      const dx = e.clientX - this._p0.x, dy = e.clientY - this._p0.y;
+      this._p0 = null;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) && this.state.view === 'index') this.go(this.state.idx + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
+    };
+    this._onMove = (e) => {
+      if (!this._bg || this._reduce) return;
+      const r = el.getBoundingClientRect();
+      const mx = (e.clientX - r.left) / r.width - 0.5, my = (e.clientY - r.top) / r.height - 0.5;
+      cancelAnimationFrame(this._raf);
+      this._raf = requestAnimationFrame(() => { if (this._bg) this._bg.style.transform = 'translate(' + (-mx * 14).toFixed(1) + 'px,' + (-my * 14).toFixed(1) + 'px)'; });
+    };
+    // no wheel listener on the stage: Safari stops page scrolling over an element with a non-passive wheel handler
+    el.addEventListener('pointerdown', this._onDown);
+    el.addEventListener('pointermove', this._onMove);
+    window.addEventListener('pointerup', this._onUp);
+  }
+  detachStage() {
+    const el = this._st;
+    if (!el) return;
+    el.removeEventListener('pointerdown', this._onDown);
+    el.removeEventListener('pointermove', this._onMove);
+    window.removeEventListener('pointerup', this._onUp);
+    this._st = null;
+  }
+
+  // ---------- shared cart ----------
+  loadCart() { try { const v = window.localStorage.getItem('kasane-cart-v1'); return v ? JSON.parse(v) : {}; } catch (e) { return null; } }
+  saveCart(c) { this.setState({ cart: c }); try { window.localStorage.setItem('kasane-cart-v1', JSON.stringify(c)); } catch (e) {} }
+
+  componentDidMount() {
+    this._sync = () => { const v = this.loadCart(); if (v) this.setState({ cart: v }); };
+    this._sync();
+    try { window.addEventListener('storage', this._sync); window.addEventListener('focus', this._sync); document.addEventListener('visibilitychange', this._sync); } catch (e) {}
+    try { this._reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { this._reduce = false; }
+    const all = { loader: false, loaderOut: true, iHead: true, iRing: true, iLetters: true, iExplore: true, iDots: true, ready: true };
+    if (this._reduce || this.props.intro === false) { this.setState(all); return; }
+    // loading: the thin ring draws itself (2.4s), the navy cover lifts, then each part arrives in turn
+    this.later(() => this.setState({ loaderOut: true }), 2700);
+    this.later(() => this.setState({ iHead: true }), 3000);
+    this.later(() => this.setState({ iRing: true }), 3150);
+    this.later(() => this.setState({ iLetters: true }), 3350);
+    this.later(() => this.setState({ loader: false }), 3950);
+    this.later(() => this.setState({ iExplore: true }), 4000);
+    this.later(() => this.setState({ iDots: true }), 4300);
+    this.later(() => { this.setState({ ready: true }); this._remain = this.DUR; this.schedule({ ...this.state, ready: true }); }, 4600);
+  }
+  componentWillUnmount() {
+    clearTimeout(this._t);
+    this._timers.forEach(clearTimeout);
+    cancelAnimationFrame(this._raf);
+    this.detachStage();
+    try { window.removeEventListener('storage', this._sync); window.removeEventListener('focus', this._sync); document.removeEventListener('visibilitychange', this._sync); } catch (e) {}
+  }
+
+  lineData() {
+    const P = {
+      Cleanse: ['media/pexels-7814990.jpg', '黄土色の壁の前に立つクレンジングオイルのボトル', 'media/pexels-6167867.jpg'],
+      Hydrate: ['media/pexels-6800941.jpg', '手のひらにのせた美容液のボトル', 'media/pexels-8128069.jpg'],
+      Balance: ['media/pexels-18350885.jpg', '大理石の台にのせたクリームの容器', 'media/pexels-18350885.jpg'],
+      Glow: ['media/pexels-8054395.jpg', '光と影の中の琥珀色のスポイトボトル', 'media/pexels-30229022.jpg'],
+      Ritual: ['media/pexels-8361478.jpg', '砂浜に置かれた香水瓶', 'media/pexels-8217476.jpg']
+    };
+    return this.baseLines().map((l) => ({ ...l, photo: P[l.name][0], alt: P[l.name][1], tilePhoto: P[l.name][2], blend: l.name === 'Ritual' ? 'screen' : 'multiply', tb: l.name === 'Ritual' ? .9 : 1.35, top: l.name === 'Ritual' ? .5 : .75 }));
+  }
+  baseLines() {
+    return [
+      { name: 'Cleanse', jp: '落とす', color: '#e83c38', headColor: '#e83c38', headBg: 'transparent', ui: '#e83c38', lead: '#e83c38', stroke: '#000000', numColor: '#000000',
+        ground: '#9acbc2', accent: '#00fff3', on: '#000000',
+        items: [{ id: 'oil', name: 'Cleansing Oil', jp: 'クレンジングオイル', img: 'media/pexels-7814990.jpg', alt: 'クレンジングオイルのボトル' }, { id: 'foam', name: 'Foam Wash', jp: '泡洗顔料', img: 'media/pexels-6167867.jpg', alt: '泡ポンプボトル' }],
+        desc: 'メイクも1日の名残も、やさしくほどいて洗い流すシリーズ。' },
+      { name: 'Hydrate', jp: '満たす', color: '#1d8883', headColor: '#1d8883', headBg: 'transparent', ui: '#1d8883', lead: '#1d8883', stroke: '#000000', numColor: '#000000',
+        ground: '#d2d2d2', accent: '#b54a4f', on: '#000000',
+        items: [{ id: 'lotion', name: 'Lotion', jp: '化粧水', img: 'media/pexels-8128069.jpg', alt: '透明な化粧水のボトル' }, { id: 'serum', name: 'Serum', jp: '美容液', img: 'media/pexels-6800941.jpg', alt: '美容液のボトル' }],
+        desc: '乾いた肌に、うるおいを1枚ずつ重ねていく化粧水と美容液のシリーズ。' },
+      { name: 'Balance', jp: '整える', color: '#002a5a', headColor: '#002a5a', headBg: '#efe8d7', ui: '#efe8d7', lead: '#efe8d7', stroke: '#efe8d7', numColor: '#efe8d7',
+        ground: '#efe8d7', accent: '#efbe7d', on: '#efe8d7',
+        items: [{ id: 'cream', name: 'Cream', jp: 'クリーム', img: 'media/pexels-18350885.jpg', alt: 'クリームの容器' }, { id: 'gel', name: 'Barrier Gel', jp: 'ジェルクリーム', img: 'media/pexels-8533216.jpg', alt: 'グレーのチューブ' }],
+        desc: 'ゆらぎやすい季節の肌を、そっと包んでととのえるクリームのシリーズ。' },
+      { name: 'Glow', jp: '灯す', color: '#6d3969', headColor: '#6d3969', headBg: '#e0f8fd', ui: '#efe8d7', lead: '#efe8d7', stroke: '#efe8d7', numColor: '#efe8d7',
+        ground: '#e0f8fd', accent: '#73bf94', on: '#efe8d7',
+        items: [{ id: 'base', name: 'Glow Base', jp: '化粧下地', img: 'media/pexels-10566524.jpg', alt: '光の縞が落ちる白いポンプボトル' }, { id: 'faceoil', name: 'Face Oil', jp: 'フェイスオイル', img: 'media/pexels-8054395.jpg', alt: '琥珀色のスポイトボトル' }],
+        desc: '素肌の色はそのままに、ほんのりツヤを灯す下地とオイルのシリーズ。' },
+      { name: 'Ritual', jp: '香る', color: '#282b29', headColor: '#282b29', headBg: '#f0c1c1', ui: '#f0c1c1', lead: '#f0c1c1', stroke: '#f0c1c1', numColor: '#f0c1c1',
+        ground: '#f4c4c4', accent: '#cc999b', on: '#f0c1c1',
+        items: [{ id: 'body', name: 'Body Milk', jp: 'ボディミルク', img: 'media/pexels-8217476.jpg', alt: '琥珀色のポンプボトルを押す手' }, { id: 'parfum', name: 'Eau de Parfum', jp: 'オードパルファム', img: 'media/pexels-34089130.jpg', alt: 'すりガラスの香水瓶' }],
+        desc: '1日の終わりを、心地よい香りでむすぶボディとフレグランスのシリーズ。' }
+    ];
+  }
+
+  renderVals() {
+    const s = this.state;
+    const L = this.lineData();
+    const idx = s.idx;
+    const cur = L[idx];
+    const inside = s.view !== 'index';
+    const shown = s.view === 'in';
+    const COPY = {
+      Cleanse: ['するりと、今日をほどく。', 'Cleanse — クレンジング・洗顔'],
+      Hydrate: ['うるおいを、もう1枚。', 'Hydrate — 化粧水・美容液'],
+      Balance: ['ゆらぐ日も、やわらかく。', 'Balance — クリーム'],
+      Glow: ['ひとさじの、光を。', 'Glow — 化粧下地・フェイスオイル'],
+      Ritual: ['香りで、今日をむすぶ。', 'Ritual — ボディ・フレグランス']
+    };
+    // two layers per letter: the inner span rises in (animation), the outer span leaves upward (transition)
+    const letters = cur.name.split('').map((ch, i) => {
+      const r = Math.max(0, s.inOrder.indexOf(i));
+      const ro = Math.max(0, s.order.indexOf(i));
+      return {
+        ch,
+        tf: s.iLetters ? 'none' : 'translateY(110%)',
+        anim: s.iLetters ? 'rise' + idx + ' 1.3s cubic-bezier(.16,1,.3,1) ' + (r * 0.045).toFixed(3) + 's both' : 'none',
+        otf: s.out ? 'translateY(-160%)' : 'none',
+        otr: s.out ? 'transform .7s cubic-bezier(.7,0,.84,0) ' + (ro * 0.035).toFixed(3) + 's' : 'none'
+      };
+    });
+    const reveal = (on) => on ? 'inset(-40% -40% -40% -40%)' : 'inset(100% -40% -40% -40%)';
+    const paused = this.isPaused(s);
+    const navLinks = [['Shop', 'Shop.dc.html'], ['Lines', 'Line.dc.html'], ['About', 'About.dc.html'], ['Journal', 'Journal.dc.html']];
+    return {
+      idx, name: cur.name, c: cur.color, ui: cur.ui, headColor: cur.headColor, headBg: cur.headBg, leadColor: cur.lead, accent: cur.accent,
+      rot: s.rot, letters, lead: cur.jp + '。' + cur.desc, num: '0' + (idx + 1),
+      catch: COPY[cur.name][0], sub: COPY[cur.name][1],
+      stageRef: this.stageRef, bgRef: this.bgRef, vidRefA: this.vidRefA, vidRefB: this.vidRefB,
+      // intro reveal
+      showLoader: s.loader, loaderTf: s.loaderOut ? 'translateY(-100%)' : 'none',
+      headClip: reveal(s.iHead), headY: s.iHead ? 'none' : 'translateY(20px)',
+      navItems: navLinks.map((n, i) => ({ label: n[0], href: n[1], clip: reveal(s.iHead), y: s.iHead ? 'none' : 'translateY(20px)', d: (0.1 + i * 0.1).toFixed(2) })),
+      cartScale: s.iHead ? 1 : 0,
+      ringOff: s.iRing ? 0 : 100, arcDash: s.iRing ? 320.76 : 0,
+      exploreClip: reveal(s.iExplore), exploreY: s.iExplore ? 'none' : 'translateY(16px)',
+      dotsOp: s.iDots ? 1 : 0, ctrlOp: s.iDots && !inside ? 1 : 0,
+      // views
+      stageBg: inside ? cur.ground : '#000000',
+      bgOp: inside ? 0 : 1,
+      headInk: inside ? cur.accent : '#efe8d7', headBlend: inside ? 'difference' : 'normal', barColor: inside ? cur.accent : cur.color,
+      centerTf: inside ? 'scale(3.4)' : 'none', centerOp: inside ? 0 : 1,
+      centerTr: inside ? 'transform 1s cubic-bezier(.7,0,.84,0), opacity .5s cubic-bezier(.45,0,.2,1) .5s' : 'transform 1.4s cubic-bezier(.16,1,.3,1), opacity .9s cubic-bezier(.45,0,.2,1)',
+      centerPE: inside ? 'none' : 'auto',
+      innerOp: shown ? 1 : 0, innerPE: shown ? 'auto' : 'none', innerHidden: shown ? 'false' : 'true', innerDelay: shown ? 0.2 : 0,
+      innerCards: cur.items.map((it, i) => ({ ...it, on: cur.on, href: 'P-' + it.id + '.dc.html', mt: i ? '130px' : '0px', ml: i ? '-30px' : '0px',
+        op: shown ? 1 : 0, tf: shown ? 'rotate(-14deg)' : 'translateY(120px) rotate(-14deg)', d: (0.35 + i * 0.12).toFixed(2) })),
+      enter: () => this.enter(),
+      leave: (e) => this.leave(e),
+      enterLabel: cur.name + ' の商品を見る',
+      // menu
+      menuOpen: s.menuOpen,
+      openMenu: () => { this.setPause({ menuOpen: true, hover: true }); },
+      closeMenu: () => { this.setPause({ menuOpen: false, hover: false }); },
+      menuPanels: L.map((l, i) => ({ name: l.name, src: l.photo, pick: () => { this.setPause({ menuOpen: false, hover: false }); this.later(() => this.go(i), 300); } })),
+      // auto advance
+      playState: paused ? 'paused' : 'running',
+      togglePause: () => this.setPause({ userPaused: !s.userPaused }),
+      pauseText: s.userPaused ? 'Play' : 'Pause',
+      pauseLabel: s.userPaused ? '自動切り替えを再開' : '自動切り替えを停止',
+      bgs: L.map((l, i) => ({ src: l.photo, op: i === idx ? 1 : 0, scale: i === idx ? 1 : 1.06, bright: s.dim ? 0.4 : 0.62 })),
+      cartCount: Object.values(s.cart).reduce((a, b) => a + b, 0),
+      toast: s.toast,
+      featured: [
+        { id: 'oil', num: '01', line: 'Cleanse', color: '#e83c38', on: '#000000', name: 'Cleansing Oil', jp: 'クレンジングオイル', vol: '150mL', img: 'media/pexels-7814990.jpg', alt: '黄土色の壁の前のポンプボトル' },
+        { id: 'lotion', num: '02', line: 'Hydrate', color: '#1d8883', on: '#000000', name: 'Lotion', jp: '化粧水', vol: '200mL', img: 'media/pexels-8128069.jpg', alt: '泡の入った透明な化粧水のボトル' },
+        { id: 'serum', num: '02', line: 'Hydrate', color: '#1d8883', on: '#000000', name: 'Serum', jp: '美容液', vol: '30mL', img: 'media/pexels-6800941.jpg', alt: '手のひらにのせた美容液のボトル' },
+        { id: 'cream', num: '03', line: 'Balance', color: '#002a5a', on: '#efe8d7', name: 'Cream', jp: 'クリーム', vol: '50g', img: 'media/pexels-18350885.jpg', alt: '大理石の台にのせたクリームの容器' },
+        { id: 'faceoil', num: '04', line: 'Glow', color: '#6d3969', on: '#efe8d7', name: 'Face Oil', jp: 'フェイスオイル', vol: '30mL', img: 'media/pexels-8054395.jpg', alt: '光の中の琥珀色のスポイトボトル' },
+        { id: 'parfum', num: '05', line: 'Ritual', color: '#f0c1c1', on: '#282b29', name: 'Eau de Parfum', jp: 'オードパルファム', vol: '50mL', img: 'media/pexels-34089130.jpg', alt: 'すりガラスの香水瓶' }
+      ].map((p) => {
+        const n = s.cart[p.id] || 0;
+        return { ...p, price: '[価格（税込）]', href: 'P-' + p.id + '.dc.html', addLabel: n ? 'カートに入れる（' + n + '）' : 'カートに入れる',
+          add: () => { this.saveCart({ ...this.state.cart, [p.id]: n + 1 }); this.setState({ toast: p.name + ' をカートへ。' }); } };
+      }),
+      dimOn: () => this.setPause({ dim: true, hover: true }),
+      dimOff: () => this.setPause({ dim: false, hover: false }),
+      prev: () => this.go(idx - 1, -1),
+      next: () => this.go(idx + 1, 1),
+      dots: L.map((l, i) => ({ label: l.name + '（' + l.jp + '）を表示', bg: i === idx ? cur.color : 'transparent', pick: () => this.go(i) })),
+      lines: L.map((l, i) => ({ ...l, num: '0' + (i + 1), pick: () => this.pickLine(l.name) })),
+      explore: () => this.pickLine(cur.name),
+      morning: [
+        { step: '01', name: 'Cleanse', color: '#e83c38', text: 'ぬるま湯とやわらかな泡で、夜のあいだの皮脂を軽くオフ。' },
+        { step: '02', name: 'Hydrate', color: '#1d8883', text: '化粧水を、手のひらで包むようになじませて。' },
+        { step: '03', name: 'Glow', color: '#6d3969', text: '下地を薄くのばして、ツヤをひとさじ。1日のはじまり。' }
+      ],
+      night: [
+        { step: '01', name: 'Cleanse', color: '#e83c38', text: 'メイクも汚れも、こすらずにふわりと浮かせて。' },
+        { step: '02', name: 'Hydrate', color: '#1d8883', text: '化粧水のあとに、美容液をもう1層。' },
+        { step: '03', name: 'Balance', color: '#002a5a', text: 'クリームで、うるおいにそっとふたを。' },
+        { step: '04', name: 'Ritual', color: '#f0c1c1', text: '香りのボディミルクで、今日をおしまいに。' }
+      ],
+      journal: [
+        { href: 'J-hydrate.dc.html', cat: 'Hydrate', bg: '#1d8883', src: 'media/pexels-9038626.jpg', photo: '頬にクリームをのせる女性', title: '乾燥が気になる季節の、化粧水と美容液の重ね方' },
+        { href: 'J-night.dc.html', cat: 'Ritual', bg: '#f0c1c1', src: 'media/pexels-6417910.jpg', photo: '鏡の前で手入れをする女性', title: '5分で終える、夜の手入れの組み立て方' },
+        { href: 'J-cream.dc.html', cat: 'Balance', bg: '#002a5a', src: 'media/pexels-6496465.jpg', photo: 'なめらかなクリームのテクスチャー', title: 'クリームの量は「パール1粒」から考える' }
+      ],
+      sent: s.sent,
+      subscribe: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ sent: true }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
