@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>KASANE トップ</title>
 <script src="./support.js"></script>
 </head>
@@ -11,6 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@200;300;400&amp;family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&amp;family=Noto+Sans+JP:wght@200;300;400&amp;family=Noto+Serif+JP:wght@400;500&amp;display=swap">
 <style>
+@media (max-width: 599px){[style*="padding: 0 60px;"],[style$="padding: 0 60px"],[style*="padding: 0 60px 100px;"],[style$="padding: 0 60px 100px"],[style*="padding: 0 60px 120px;"],[style$="padding: 0 60px 120px"],[style*="padding: 0 60px 160px;"],[style$="padding: 0 60px 160px"],[style*="padding: 0 60px 32px;"],[style$="padding: 0 60px 32px"],[style*="padding: 120px 60px;"],[style$="padding: 120px 60px"],[style*="padding: 120px 60px 160px;"],[style$="padding: 120px 60px 160px"],[style*="padding: 140px 60px;"],[style$="padding: 140px 60px"],[style*="padding: 160px 60px;"],[style$="padding: 160px 60px"],[style*="padding: 160px 60px 140px;"],[style$="padding: 160px 60px 140px"],[style*="padding: 180px 60px;"],[style$="padding: 180px 60px"],[style*="padding: 32px 60px 0;"],[style$="padding: 32px 60px 0"],[style*="padding: 40px 60px;"],[style$="padding: 40px 60px"],[style*="padding: 40px 60px 100px;"],[style$="padding: 40px 60px 100px"],[style*="padding: 40px 60px 120px;"],[style$="padding: 40px 60px 120px"],[style*="padding: 430px 60px 230px;"],[style$="padding: 430px 60px 230px"],[style*="padding: 56px 60px 0;"],[style$="padding: 56px 60px 0"],[style*="padding: 56px 60px 120px;"],[style$="padding: 56px 60px 120px"],[style*="padding: 60px;"],[style$="padding: 60px"],[style*="padding: 60px 60px 40px;"],[style$="padding: 60px 60px 40px"],[style*="padding: 60px 60px 56px;"],[style$="padding: 60px 60px 56px"],[style*="padding: 80px 60px 60px;"],[style$="padding: 80px 60px 60px"],[style*="padding: 96px 60px 160px;"],[style$="padding: 96px 60px 160px"]{padding-left:24px !important;padding-right:24px !important}footer{padding-left:24px !important;padding-right:24px !important}[style*="left: 60px"]{left:24px !important}[style*="right: 60px"]{right:24px !important}}
 body{margin:0;background:#000000}
 html{overscroll-behavior-y:auto !important}
 a{color:inherit}
@@ -60,6 +62,8 @@ a:hover{color:inherit}
 @media (prefers-reduced-motion: reduce){.ldraw,.lname{animation:none !important;stroke-dashoffset:0}}
 @media (prefers-reduced-motion: reduce){.wipe,.ltr,.cap{animation:none !important}}
 @media (max-width: 899px){.hide-sp{display:none !important}}
+@media (max-width: 599px){.step-row{gap:6px 14px !important;flex-wrap:wrap}.step-name{width:auto !important;font-size:20px !important}.step-text{flex-basis:100% !important;padding-left:56px}.ctrl-sp{left:auto !important;right:24px;bottom:auto !important;top:132px;gap:20px !important}section{padding-left:24px !important;padding-right:24px !important}}
+@media (max-width: 599px){.cta-sp{white-space:normal !important;width:calc(100vw - 48px);text-align:center;font-size:16px !important;line-height:1.8}}
 </style>
 </helmet>
 
@@ -125,7 +129,7 @@ a:hover{color:inherit}
     </div>
 
     <!-- bottom-left: controls (index view) -->
-    <div style="position: absolute; left: 60px; bottom: 96px; z-index: 4; display: flex; gap: 28px; font-size: 13px; letter-spacing: .1em; font-weight: 400; opacity: {{ctrlOp}}; pointer-events: {{centerPE}}; transition: opacity 1s cubic-bezier(.45,0,.2,1);">
+    <div class="ctrl-sp" style="position: absolute; left: 60px; bottom: 96px; z-index: 4; display: flex; gap: 28px; font-size: 13px; letter-spacing: .1em; font-weight: 400; opacity: {{ctrlOp}}; pointer-events: {{centerPE}}; transition: opacity 1s cubic-bezier(.45,0,.2,1);">
       <button type="button" onClick="{{prev}}" style="background: none; border: 0; color: #efe8d7; font: inherit; letter-spacing: inherit; cursor: pointer; padding: 12px 0;">Prev</button>
       <button type="button" onClick="{{next}}" style="background: none; border: 0; color: #efe8d7; font: inherit; letter-spacing: inherit; cursor: pointer; padding: 12px 0;">Next</button>
       <button type="button" onClick="{{togglePause}}" aria-label="{{pauseLabel}}" style="background: none; border: 0; color: #efe8d7; font: inherit; letter-spacing: inherit; cursor: pointer; padding: 12px 0;">{{pauseText}}</button>
@@ -158,7 +162,7 @@ a:hover{color:inherit}
         </sc-for>
       </div>
       <button type="button" class="bar" onClick="{{leave}}" style="position: absolute; left: 60px; bottom: 90px; --bar: {{c}}; color: #000000; font-size: 13px; letter-spacing: .1em; font-weight: 400;">Back to Lines</button>
-      <a class="bar" href="Line.dc.html" onClick="{{explore}}" style="position: absolute; left: 50%; bottom: 60px; transform: translateX(-50%); --bar: {{c}}; color: #000000; font-family: 'Noto Serif JP', serif; font-size: 20px; letter-spacing: .14em; white-space: nowrap;">{{catch}}　—　{{name}} を見る</a>
+      <a class="bar cta-sp" href="Line.dc.html" onClick="{{explore}}" style="position: absolute; left: 50%; bottom: 60px; transform: translateX(-50%); --bar: {{c}}; color: #000000; font-family: 'Noto Serif JP', serif; font-size: 20px; letter-spacing: .14em; white-space: nowrap;">{{catch}}　—　{{name}} を見る</a>
     </div>
 
     <!-- ===== mobile menu ===== -->
@@ -201,7 +205,7 @@ a:hover{color:inherit}
       <p style="margin: 0; max-width: 520px; font-size: 18px; line-height: 1.8;">お手入れを5つのステップに分けて、ひとつずつ色を添えて。</p>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 24px;">
       <sc-for list="{{lines}}" as="ln" hint-placeholder-count="5">
         <a class="tile" href="Line.dc.html" onClick="{{ln.pick}}" style="display: flex; flex-direction: column; gap: 22px; text-decoration: none; color: #efe8d7;">
           <div class="tile-face" style="position: relative; container-type: inline-size; height: 320px; background: {{ln.color}}; overflow: hidden;">
@@ -275,26 +279,26 @@ a:hover{color:inherit}
         <h2 style="margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 48px; line-height: 1.1; letter-spacing: -.01em; color: #002a5a;">Ritual</h2>
         <p style="margin: 0; max-width: 520px; font-size: 18px; line-height: 1.8; font-weight: 300;">朝と夜で、重ねる色を少しだけ変えてみる。そんな手順のひとつ。</p>
       </div>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 48px 64px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 48px 64px;">
         <div style="display: flex; flex-direction: column;">
           <h3 style="margin: 0 0 24px; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 30px; letter-spacing: -.01em; color: #002a5a;">Morning</h3>
           <sc-for list="{{morning}}" as="s" hint-placeholder-count="3">
-            <div style="display: flex; gap: 24px; align-items: center; padding: 22px 0; border-top: 1px solid #002a5a;">
+            <div class="step-row" style="display: flex; gap: 24px; align-items: center; padding: 22px 0; border-top: 1px solid #002a5a;">
               <span aria-hidden="true" style="width: 14px; height: 14px; border-radius: 50%; background: {{s.color}}; flex: none;"></span>
               <span style="font-size: 13px; letter-spacing: .1em; font-weight: 400; width: 28px;">{{s.step}}</span>
-              <span style="font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 22px; width: 120px;">{{s.name}}</span>
-              <span style="font-size: 16px; line-height: 1.7; font-weight: 300;">{{s.text}}</span>
+              <span class="step-name" style="font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 22px; width: 120px; flex: none;">{{s.name}}</span>
+              <span class="step-text" style="flex: 1; min-width: 0; font-size: 16px; line-height: 1.7; font-weight: 300; overflow-wrap: anywhere;">{{s.text}}</span>
             </div>
           </sc-for>
         </div>
         <div style="display: flex; flex-direction: column;">
           <h3 style="margin: 0 0 24px; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 30px; letter-spacing: -.01em; color: #002a5a;">Night</h3>
           <sc-for list="{{night}}" as="s" hint-placeholder-count="4">
-            <div style="display: flex; gap: 24px; align-items: center; padding: 22px 0; border-top: 1px solid #002a5a;">
+            <div class="step-row" style="display: flex; gap: 24px; align-items: center; padding: 22px 0; border-top: 1px solid #002a5a;">
               <span aria-hidden="true" style="width: 14px; height: 14px; border-radius: 50%; background: {{s.color}}; flex: none;"></span>
               <span style="font-size: 13px; letter-spacing: .1em; font-weight: 400; width: 28px;">{{s.step}}</span>
-              <span style="font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 22px; width: 120px;">{{s.name}}</span>
-              <span style="font-size: 16px; line-height: 1.7; font-weight: 300;">{{s.text}}</span>
+              <span class="step-name" style="font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 22px; width: 120px; flex: none;">{{s.name}}</span>
+              <span class="step-text" style="flex: 1; min-width: 0; font-size: 16px; line-height: 1.7; font-weight: 300; overflow-wrap: anywhere;">{{s.text}}</span>
             </div>
           </sc-for>
         </div>
@@ -309,7 +313,7 @@ a:hover{color:inherit}
         <h2 style="margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 48px; line-height: 1.1; letter-spacing: -.01em;">Journal</h2>
         <a class="bar" href="#journal" style="--bar: #efe8d7; font-size: 20px; line-height: 24px;">View all</a>
       </div>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 40px;">
         <sc-for list="{{journal}}" as="j" hint-placeholder-count="3">
           <a href="{{j.href}}" style="display: flex; flex-direction: column; gap: 20px; text-decoration: none; color: #efe8d7;">
             <div style="position: relative; aspect-ratio: 4 / 3; background: {{j.bg}}; overflow: hidden;">

@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>KASANE Hydrate Serum</title>
 <script src="./support.js"></script>
 </head>
@@ -11,6 +12,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@200;300;400&amp;family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&amp;family=Noto+Sans+JP:wght@200;300;400&amp;family=Noto+Serif+JP:wght@400;500&amp;display=swap">
 <style>
+@media (max-width: 599px){[style*="padding: 0 60px;"],[style$="padding: 0 60px"],[style*="padding: 0 60px 100px;"],[style$="padding: 0 60px 100px"],[style*="padding: 0 60px 120px;"],[style$="padding: 0 60px 120px"],[style*="padding: 0 60px 160px;"],[style$="padding: 0 60px 160px"],[style*="padding: 0 60px 32px;"],[style$="padding: 0 60px 32px"],[style*="padding: 120px 60px;"],[style$="padding: 120px 60px"],[style*="padding: 120px 60px 160px;"],[style$="padding: 120px 60px 160px"],[style*="padding: 140px 60px;"],[style$="padding: 140px 60px"],[style*="padding: 160px 60px;"],[style$="padding: 160px 60px"],[style*="padding: 160px 60px 140px;"],[style$="padding: 160px 60px 140px"],[style*="padding: 180px 60px;"],[style$="padding: 180px 60px"],[style*="padding: 32px 60px 0;"],[style$="padding: 32px 60px 0"],[style*="padding: 40px 60px;"],[style$="padding: 40px 60px"],[style*="padding: 40px 60px 100px;"],[style$="padding: 40px 60px 100px"],[style*="padding: 40px 60px 120px;"],[style$="padding: 40px 60px 120px"],[style*="padding: 430px 60px 230px;"],[style$="padding: 430px 60px 230px"],[style*="padding: 56px 60px 0;"],[style$="padding: 56px 60px 0"],[style*="padding: 56px 60px 120px;"],[style$="padding: 56px 60px 120px"],[style*="padding: 60px;"],[style$="padding: 60px"],[style*="padding: 60px 60px 40px;"],[style$="padding: 60px 60px 40px"],[style*="padding: 60px 60px 56px;"],[style$="padding: 60px 60px 56px"],[style*="padding: 80px 60px 60px;"],[style$="padding: 80px 60px 60px"],[style*="padding: 96px 60px 160px;"],[style$="padding: 96px 60px 160px"]{padding-left:24px !important;padding-right:24px !important}footer{padding-left:24px !important;padding-right:24px !important}[style*="left: 60px"]{left:24px !important}[style*="right: 60px"]{right:24px !important}}
+@media (max-width: 599px){header[style*="padding: 40px 60px"]{padding:24px !important;gap:18px 16px !important}header[style*="position: absolute"]{left:24px !important;right:24px !important;top:24px !important;gap:16px !important}header > nav{order:3;flex-basis:100%;gap:6px 22px !important;font-size:15px !important;line-height:20px !important}header .bar{--barh:4px;padding-bottom:10px}header .bl{height:4px !important}header > a[href="Cart.dc.html"]{width:56px !important;height:56px !important;font-size:11px !important}section{padding-left:24px !important;padding-right:24px !important}.btn-set{align-self:stretch !important;padding:12px 16px !important;letter-spacing:.04em !important}}
 body{margin:0;background:#000000}
 html{overscroll-behavior-y:auto !important}
 a{color:inherit}
@@ -110,7 +113,7 @@ a:hover{color:inherit}
         <h2 style="margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 48px; line-height: 1.1; letter-spacing: -.01em; color: #1d8883;">For</h2>
         <p style="margin: 0; max-width: 520px; font-size: 18px; line-height: 1.8;">こんな日の肌のために。</p>
       </div>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0 48px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 0 48px;">
         <sc-for list="{{concerns}}" as="c" hint-placeholder-count="3">
           <div style="display: flex; flex-direction: column; gap: 18px; padding: 32px 0; border-top: 1px solid #1d8883;">
             <span style="font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 56px; line-height: 1; color: #1d8883;">{{c.num}}</span>
@@ -194,7 +197,7 @@ a:hover{color:inherit}
         <h2 style="margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 48px; line-height: 1.1; letter-spacing: -.01em; color: #1d8883;">Buy</h2>
         <p style="margin: 0; font-size: 18px; line-height: 1.8;">お好きな受け取り方で。</p>
       </div>
-      <div role="radiogroup" aria-label="購入方法" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+      <div role="radiogroup" aria-label="購入方法" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px;">
         <sc-for list="{{plans}}" as="p" hint-placeholder-count="2">
           <button class="opt" type="button" role="radio" aria-checked="{{p.checked}}" onClick="{{p.pick}}" style="text-align: left; cursor: pointer; border: 0; border-top: 1px solid #1d8883; border-radius: 0; padding: 36px; display: flex; flex-direction: column; gap: 14px; font: inherit; letter-spacing: inherit; background: {{p.bg}}; color: {{p.fg}}; transition: background-color .7s cubic-bezier(.45,0,.2,1), color .7s cubic-bezier(.45,0,.2,1);">
             <span style="font-size: 13px; letter-spacing: .1em; font-weight: 400;">{{p.tag}}</span>
@@ -225,7 +228,7 @@ a:hover{color:inherit}
           <h2 style="margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: 40px; line-height: 1.1; letter-spacing: -.01em;">Lotion + Serum</h2>
           <p style="margin: 0; font-size: 16px; line-height: 1.9; font-weight: 300;">Hydrate シリーズの化粧水と美容液を、まとめてそろえられるセット。はじめての人にも。</p>
           <p style="margin: 0; font-size: 18px; font-weight: 300;">[セット価格（税込）]</p>
-          <button type="button" class="btn" onClick="{{addSet}}" style="align-self: flex-start; height: 56px; padding: 0 40px; background: #000000; color: #efe8d7; border: 0; border-radius: 0; font: inherit; font-size: 16px; letter-spacing: .12em; font-weight: 400; cursor: pointer;">{{setLabel}}</button>
+          <button type="button" class="btn btn-set" onClick="{{addSet}}" style="align-self: flex-start; min-height: 56px; padding: 12px 40px; line-height: 1.5; background: #000000; color: #efe8d7; border: 0; border-radius: 0; font: inherit; font-size: 16px; letter-spacing: .12em; font-weight: 400; cursor: pointer;">{{setLabel}}</button>
         </div>
       </div>
 
@@ -281,7 +284,7 @@ a:hover{color:inherit}
     <img src="media/pexels-6130668.jpg" alt="" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.8);">
     <div aria-hidden="true" style="position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(0,0,0,0) 30%, rgba(0,0,0,.9) 100%);"></div>
     <div style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 36px;">
-      <p aria-hidden="true" style="margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: clamp(64px, 10.8vw, 156px); line-height: 1; letter-spacing: -.015em; color: transparent; -webkit-text-stroke: 1px #efe8d7; transform: scaleY(1.1);">Hydrate</p>
+      <p aria-hidden="true" style="margin: 0; font-family: 'Bodoni Moda', 'Noto Serif JP', serif; font-weight: 500; font-size: clamp(44px, 13vw, 156px); line-height: 1; letter-spacing: -.015em; color: transparent; -webkit-text-stroke: 1px #efe8d7; transform: scaleY(1.1);">Hydrate</p>
       <h2 style="margin: 0; font-family: 'Noto Serif JP', serif; font-weight: 400; font-size: 26px; line-height: 1.7; letter-spacing: .08em;">今日の肌に、うるおいをもう1枚。</h2>
       <a class="btn" href="#buy" style="display: inline-flex; align-items: center; height: 64px; padding: 0 56px; background: #1d8883; color: #000000; text-decoration: none; font-size: 17px; letter-spacing: .12em; font-weight: 400;">購入する</a>
       <a class="bar" href="Main.dc.html" style="--bar: #1d8883; font-size: 20px; line-height: 24px;">Other Lines</a>
